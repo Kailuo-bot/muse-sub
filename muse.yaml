@@ -1,7 +1,8 @@
-# muse v2 —— Clash Meta (mihomo) 配置
-# v2 改动: 节点已内嵌(导入即有节点, 不依赖先联网拉取订阅),
-#          内嵌节点为 2026-11-01 抓取后去重 + TCP 连通性筛选的结果;
-#          proxy-providers 保留, 每 6 小时继续拉新, 健康检查自动剔除死节点。
+# muse v3 —— Clash Meta (mihomo) 配置
+# v3 规则: 只收北美(美国/加拿大/墨西哥)、日本、欧洲的节点;
+#          地区按服务器 IP 归属判定, CDN 前置节点按节点名标注的国家判定, 无法判定地区的一律不收。
+#          节点全部内嵌, 由 Muse 每日重新抓取/去重/连通筛选/地区筛选后更新本仓库;
+#          手机端健康检查 + 自动选择组持续剔除失效节点。
 mixed-port: 7890
 allow-lan: false
 mode: rule
@@ -40,36 +41,6 @@ proxies:
   tls: false
   skip-cert-verify: true
   network: tcp
-- name: wz·🇭🇰 香港_01 - wanzhuanmi.com
-  server: 47.244.120.197
-  port: 23026
-  type: vmess
-  udp: true
-  uuid: b9de1bc9-baa7-41ac-86f7-ccd59695cb21
-  alterId: 0
-  cipher: auto
-  tls: false
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /arki
-    headers:
-      Host: 47.244.120.197
-- name: wz·🇷🇺 俄罗斯_01 - wanzhuanmi.com
-  server: xnod13x.artemida.live
-  port: 8443
-  type: vless
-  udp: true
-  uuid: c05ec3c7-2784-da2b-aa98-a3c132860fcb
-  tls: true
-  skip-cert-verify: true
-  network: tcp
-  flow: xtls-rprx-vision
-  reality-opts:
-    public-key: ZRTNgwFRP8viY4SQOgPTfWlLWJCwY3dr0aawA7vHwhU
-    short-id: a1b2c3d4e5f6a7b8
-  servername: xnod13x.artemida.live
-  client-fingerprint: random
 - name: wz·🇺🇸 美国_01 - wanzhuanmi.com
   server: 104.17.162.11
   port: 2082
@@ -92,19 +63,6 @@ proxies:
   tls: false
   skip-cert-verify: true
   network: xhttp
-- name: wz·🇷🇺 俄罗斯_02 - wanzhuanmi.com
-  server: 146.185.197.95
-  port: 443
-  type: vless
-  udp: true
-  uuid: 9ea8b000-58ce-0005-b108-989dd4f248f1
-  tls: false
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /live/ws2
-    headers:
-      Host: 146.185.197.95
 - name: wz·🇳🇱 荷兰_01 - wanzhuanmi.com
   server: app-mi-26.spbstudentlife.com
   port: 443
@@ -134,36 +92,6 @@ proxies:
     short-id: 6c5c7900406a1ae7
   servername: www.samsung.com
   client-fingerprint: firefox
-- name: wz·🇳🇱 荷兰_03 - wanzhuanmi.com
-  server: 72.56.38.83
-  port: 443
-  type: vless
-  udp: true
-  uuid: 1e2b9c0c-4f9b-56f5-a062-1c4f2d2aa200
-  tls: true
-  skip-cert-verify: true
-  network: tcp
-  flow: xtls-rprx-vision
-  reality-opts:
-    public-key: ZzIetLcQtENjIXQ9XZqFo8p3J81p8Emj0wi51Uy07n8
-    short-id: ''
-  servername: absolute-disaster.org
-  client-fingerprint: chrome
-- name: wz·🇰🇿 哈萨克斯坦_01 - wanzhuanmi.com
-  server: 95.56.251.12
-  port: 47443
-  type: vless
-  udp: true
-  uuid: 1fe01c8a-ab37-4e95-bbfc-95d4a608931e
-  tls: true
-  skip-cert-verify: true
-  network: tcp
-  flow: xtls-rprx-vision
-  reality-opts:
-    public-key: z1GSwCEACvO9RLcMVpcURiT8er4oeIdeSJhraw_0cGU
-    short-id: ae97223a8f799877
-  servername: kz1.waspnest.space
-  client-fingerprint: chrome
 - name: wz·🇸🇪 瑞典_01 - wanzhuanmi.com
   server: 13.143.180.104
   port: 443
@@ -265,50 +193,6 @@ proxies:
     short-id: e0215064d8d1fd7c
   servername: cdn.tbank.ru
   client-fingerprint: chrome
-- name: wz·🇳🇱 荷兰_02 - wanzhuanmi.com
-  server: 186.246.9.29
-  port: 443
-  type: vless
-  udp: true
-  uuid: b2847c3b-5278-4b06-9c66-bc919d2dfec7
-  tls: true
-  skip-cert-verify: true
-  network: tcp
-  reality-opts:
-    public-key: MPNMomAMn_lu9YMYjD2jAQWrI-rTM4hj9Jgg9d6qzTA
-    short-id: 50ad5564
-  servername: wordpress.com
-  client-fingerprint: firefox
-- type: vless
-  name: free18·每天更新，请加电报群防止失联
-  server: tau1.freerunet.online
-  port: 443
-  uuid: ca14493b-b984-4ffb-bc0e-9cb5da969e15
-  flow: xtls-rprx-vision
-  udp: true
-  tls: true
-  servername: tau1.freerunet.online
-  sni: tau1.freerunet.online
-  skip-cert-verify: true
-  client-fingerprint: qq
-  reality-opts:
-    public-key: l1mx_plNc2oiWxJCcZLh3SGfFU-5QxYpgQ__Ea59WEg
-    short-id: 4a7b1c8d
-- type: vless
-  name: free18·美国 (71)
-  server: 178.236.245.59
-  port: 443
-  uuid: ca14493b-b984-4ffb-bc0e-9cb5da969e15
-  flow: xtls-rprx-vision
-  udp: true
-  tls: true
-  servername: tau1.freerunet.online
-  sni: tau1.freerunet.online
-  skip-cert-verify: true
-  client-fingerprint: firefox
-  reality-opts:
-    public-key: l1mx_plNc2oiWxJCcZLh3SGfFU-5QxYpgQ__Ea59WEg
-    short-id: 4a7b1c8d
 - type: vless
   name: free18·美国 (73)
   server: sg2-8sb.6121999.dpdns.org
@@ -701,19 +585,6 @@ proxies:
     headers:
       Host: imanvipreserved.pages.dev
 - type: trojan
-  name: free18·俄罗斯
-  server: 201.24.57.254
-  port: 2053
-  password: humanity
-  udp: true
-  tls: true
-  servername: www.cordweave.com
-  sni: www.cordweave.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-- type: trojan
   name: free18·德国 (2)
   server: 185.225.205.75
   port: 8443
@@ -768,19 +639,6 @@ proxies:
 - type: trojan
   name: free18·美国 (26)
   server: 172.64.154.219
-  port: 443
-  password: humanity
-  udp: true
-  tls: true
-  servername: www.cordweave.com
-  sni: www.cordweave.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-- type: trojan
-  name: free18·俄罗斯 (2)
-  server: 217.26.26.14
   port: 443
   password: humanity
   udp: true
@@ -929,34 +787,8 @@ proxies:
     headers:
       Host: www.calmlunch.com
 - type: trojan
-  name: free18·美国 (35)
-  server: 46.8.124.8
-  port: 443
-  password: humanity
-  udp: true
-  tls: true
-  servername: www.cordweave.com
-  sni: www.cordweave.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-- type: trojan
   name: free18·美国 (36)
   server: 104.18.39.55
-  port: 443
-  password: humanity
-  udp: true
-  tls: true
-  servername: www.cordweave.com
-  sni: www.cordweave.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-- type: trojan
-  name: free18·香港
-  server: 103.69.128.221
   port: 443
   password: humanity
   udp: true
@@ -994,22 +826,6 @@ proxies:
   ws-opts:
     path: /assignment
 - type: vless
-  name: free18·俄罗斯 (3)
-  server: 194.87.143.165
-  port: 8443
-  uuid: f9613819-d2fe-4b3a-a2e6-40c184c6854c
-  udp: true
-  tls: true
-  servername: wsru1.wba-pn.ru
-  sni: wsru1.wba-pn.ru
-  skip-cert-verify: true
-  client-fingerprint: ios
-  network: ws
-  ws-opts:
-    path: /
-    headers:
-      Host: 194.87.143.165
-- type: vless
   name: free18·美国 (37)
   server: 8.35.211.73
   port: 2087
@@ -1041,19 +857,6 @@ proxies:
 - type: trojan
   name: free18·美国 (39)
   server: 194.55.164.118
-  port: 443
-  password: humanity
-  udp: true
-  tls: true
-  servername: www.cordweave.com
-  sni: www.cordweave.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-- type: trojan
-  name: free18·泰国
-  server: 103.224.84.7
   port: 443
   password: humanity
   udp: true
@@ -1317,19 +1120,6 @@ proxies:
   ws-opts:
     path: /assignment
 - type: trojan
-  name: free18·香港 (2)
-  server: 47.57.181.17
-  port: 443
-  password: humanity
-  udp: true
-  tls: true
-  servername: www.cordweave.com
-  sni: www.cordweave.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-- type: trojan
   name: free18·美国 (59)
   server: 104.18.47.138
   port: 443
@@ -1358,19 +1148,6 @@ proxies:
 - type: trojan
   name: free18·荷兰 (3)
   server: 188.164.248.143
-  port: 443
-  password: humanity
-  udp: true
-  tls: true
-  servername: www.cordweave.com
-  sni: www.cordweave.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-- type: trojan
-  name: free18·香港 (3)
-  server: 103.219.195.65
   port: 443
   password: humanity
   udp: true
@@ -1505,45 +1282,6 @@ proxies:
   ws-opts:
     path: /assignment
 - type: trojan
-  name: free18·香港 (4)
-  server: 45.196.235.64
-  port: 443
-  password: humanity
-  udp: true
-  tls: true
-  servername: www.cordweave.com
-  sni: www.cordweave.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-- type: trojan
-  name: free18·韩国
-  server: 54.116.249.102
-  port: 443
-  password: humanity
-  udp: true
-  tls: true
-  servername: www.cordweave.com
-  sni: www.cordweave.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-- type: trojan
-  name: free18·韩国 (2)
-  server: 103.218.173.218
-  port: 443
-  password: humanity
-  udp: true
-  tls: true
-  servername: www.cordweave.com
-  sni: www.cordweave.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-- type: trojan
   name: free18·美国 (69)
   server: 193.134.209.165
   port: 443
@@ -1570,32 +1308,6 @@ proxies:
   ws-opts:
     path: /assignment
 - type: trojan
-  name: free18·新加坡
-  server: 178.93.160.132
-  port: 443
-  password: humanity
-  udp: true
-  tls: true
-  servername: www.cordweave.com
-  sni: www.cordweave.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-- type: trojan
-  name: free18·新加坡 (2)
-  server: 157.245.159.88
-  port: 443
-  password: humanity
-  udp: true
-  tls: true
-  servername: www.cordweave.com
-  sni: www.cordweave.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-- type: trojan
   name: free18·日本 (4)
   server: 212.192.221.107
   port: 443
@@ -1608,22 +1320,6 @@ proxies:
   network: ws
   ws-opts:
     path: /assignment
-- type: vless
-  name: free18·🇭🇰香港 02
-  server: 140.225.208.140
-  port: 2083
-  uuid: e3c3b722-1264-4cdc-a97c-b0a1bb73cd67
-  udp: true
-  tls: true
-  servername: speedtestmark.com
-  sni: speedtestmark.com
-  skip-cert-verify: true
-  client-fingerprint: chrome
-  network: ws
-  ws-opts:
-    path: /vless-ws
-    headers:
-      Host: speedtestmark.com
 - type: trojan
   name: free18·🇫🇷法国
   server: 207.180.209.128
@@ -1664,19 +1360,6 @@ proxies:
   ws-opts:
     path: /assignment
 - type: trojan
-  name: free18·🇦🇺澳大利亚
-  server: 125.7.24.251
-  port: 443
-  password: humanity
-  udp: true
-  tls: true
-  servername: www.cordweave.com
-  sni: www.cordweave.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-- type: trojan
   name: free18·🇩🇪德国 01
   server: 202.61.198.53
   port: 443
@@ -1692,19 +1375,6 @@ proxies:
 - type: trojan
   name: free18·🇨🇭瑞士
   server: 83.228.199.3
-  port: 443
-  password: humanity
-  udp: true
-  tls: true
-  servername: www.cordweave.com
-  sni: www.cordweave.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-- type: trojan
-  name: free18·🇹🇷土耳其
-  server: 213.238.182.13
   port: 443
   password: humanity
   udp: true
@@ -1755,19 +1425,6 @@ proxies:
   ws-opts:
     path: /assignment
 - type: trojan
-  name: free18·🇸🇰斯洛伐克
-  server: 185.112.249.201
-  port: 8443
-  password: humanity
-  udp: true
-  tls: true
-  servername: www.cordweave.com
-  sni: www.cordweave.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-- type: trojan
   name: free18·🇭🇺匈牙利
   server: 38.180.225.247
   port: 2053
@@ -1783,19 +1440,6 @@ proxies:
 - type: trojan
   name: free18·🇧🇬保加利亚
   server: 185.82.218.224
-  port: 443
-  password: humanity
-  udp: true
-  tls: true
-  servername: www.cordweave.com
-  sni: www.cordweave.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-- type: trojan
-  name: free18·🇷🇴罗马尼亚
-  server: 89.125.201.4
   port: 443
   password: humanity
   udp: true
@@ -1848,84 +1492,6 @@ proxies:
 - type: trojan
   name: free18·🇲🇩摩尔多瓦 02
   server: 5.181.158.96
-  port: 443
-  password: humanity
-  udp: true
-  tls: true
-  servername: www.cordweave.com
-  sni: www.cordweave.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-- type: trojan
-  name: free18·🇰🇿哈萨克斯坦 01
-  server: 93.170.72.138
-  port: 443
-  password: humanity
-  udp: true
-  tls: true
-  servername: www.cordweave.com
-  sni: www.cordweave.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-- type: trojan
-  name: free18·🇰🇿哈萨克斯坦 02
-  server: 109.248.170.245
-  port: 443
-  password: humanity
-  udp: true
-  tls: true
-  servername: www.cordweave.com
-  sni: www.cordweave.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-- type: trojan
-  name: free18·🇸🇬新加坡 01
-  server: 168.144.41.69
-  port: 443
-  password: humanity
-  udp: true
-  tls: true
-  servername: www.cordweave.com
-  sni: www.cordweave.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-- type: trojan
-  name: free18·🇲🇾马来西亚
-  server: 76.13.188.13
-  port: 8443
-  password: humanity
-  udp: true
-  tls: true
-  servername: www.cordweave.com
-  sni: www.cordweave.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-- type: trojan
-  name: free18·🇻🇳越南 01
-  server: 103.161.179.36
-  port: 443
-  password: humanity
-  udp: true
-  tls: true
-  servername: www.cordweave.com
-  sni: www.cordweave.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-- type: trojan
-  name: free18·🇻🇳越南 02
-  server: 103.161.178.72
   port: 443
   password: humanity
   udp: true
@@ -1991,32 +1557,6 @@ proxies:
 - type: trojan
   name: free18·🇯🇵日本 01
   server: 172.237.0.160
-  port: 443
-  password: humanity
-  udp: true
-  tls: true
-  servername: www.cordweave.com
-  sni: www.cordweave.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-- type: trojan
-  name: free18·🇸🇬新加坡 02
-  server: 172.104.185.40
-  port: 443
-  password: humanity
-  udp: true
-  tls: true
-  servername: www.cordweave.com
-  sni: www.cordweave.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-- type: trojan
-  name: free18·🇺🇸美国 03
-  server: 46.174.142.238
   port: 443
   password: humanity
   udp: true
@@ -2733,58 +2273,6 @@ proxies:
   ws-opts:
     path: /assignment
 - type: trojan
-  name: free18·🇸🇬新加坡 03
-  server: 128.199.128.117
-  port: 443
-  password: humanity
-  udp: true
-  tls: true
-  servername: www.cordweave.com
-  sni: www.cordweave.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-- type: trojan
-  name: free18·🇸🇬新加坡 04
-  server: 209.97.165.213
-  port: 443
-  password: humanity
-  udp: true
-  tls: true
-  servername: www.cordweave.com
-  sni: www.cordweave.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-- type: trojan
-  name: free18·🇸🇬新加坡 05
-  server: 165.22.102.89
-  port: 443
-  password: humanity
-  udp: true
-  tls: true
-  servername: www.cordweave.com
-  sni: www.cordweave.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-- type: trojan
-  name: free18·🇭🇰香港 07
-  server: 43.161.233.40
-  port: 8443
-  password: humanity
-  udp: true
-  tls: true
-  servername: www.cordweave.com
-  sni: www.cordweave.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-- type: trojan
   name: free18·🇭🇰香港 08
   server: 95.182.95.144
   port: 443
@@ -2840,45 +2328,6 @@ proxies:
   name: free18·🇺🇸美国 08
   server: 199.119.137.32
   port: 8443
-  password: humanity
-  udp: true
-  tls: true
-  servername: www.cordweave.com
-  sni: www.cordweave.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-- type: trojan
-  name: free18·🇰🇷韩国 01
-  server: 141.164.34.161
-  port: 8443
-  password: humanity
-  udp: true
-  tls: true
-  servername: www.cordweave.com
-  sni: www.cordweave.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-- type: trojan
-  name: free18·🇰🇷韩国 02
-  server: 43.164.132.109
-  port: 443
-  password: humanity
-  udp: true
-  tls: true
-  servername: www.cordweave.com
-  sni: www.cordweave.com
-  skip-cert-verify: true
-  network: ws
-  ws-opts:
-    path: /assignment
-- type: trojan
-  name: free18·🇰🇷韩国 03
-  server: 141.164.56.22
-  port: 443
   password: humanity
   udp: true
   tls: true
@@ -3029,22 +2478,6 @@ proxies:
   network: ws
   ws-opts:
     path: /
-- type: vless
-  name: free18·🇭🇰香港 12
-  server: hk01.cf.sh-cloudflare.sbs
-  port: 2096
-  uuid: c86efa7e-f7fb-47d6-b832-6b44cf5e8b71
-  udp: true
-  tls: true
-  servername: hk01.cdn00.top
-  sni: hk01.cdn00.top
-  skip-cert-verify: true
-  client-fingerprint: chrome
-  network: ws
-  ws-opts:
-    path: /shanhai/hk01
-    headers:
-      Host: hk01.cdn00.top
 - name: ermaozi·🇩🇪_DE_德国
   type: vless
   server: 5.175.205.190
@@ -3078,47 +2511,6 @@ proxies:
     path: /hls/cctv5phd.m3u8
     headers:
       Host: guanwang.awsno.com
-  udp: true
-- name: ermaozi·🇨🇳_CN_中国->🇳🇱_NL_荷兰
-  type: vmess
-  server: v29.hdacd.com
-  port: 30829
-  uuid: cbb3f877-d1fb-344c-87a9-d153bffd5484
-  alterId: 2
-  cipher: auto
-  tls: false
-  skip-cert-verify: true
-  udp: true
-- name: ermaozi·🇨🇳_CN_中国
-  type: vmess
-  server: 120.48.133.162
-  port: 10086
-  uuid: a01e5d56-464f-45b9-b600-164db4700162
-  alterId: 0
-  cipher: auto
-  tls: false
-  skip-cert-verify: true
-  network: ws
-  udp: true
-- name: ermaozi·🇨🇳_CN_中国->🇫🇷_FR_法国
-  type: vmess
-  server: v35.hdacd.com
-  port: 30835
-  uuid: cbb3f877-d1fb-344c-87a9-d153bffd5484
-  alterId: 2
-  cipher: auto
-  tls: false
-  skip-cert-verify: true
-  udp: true
-- name: ermaozi·🇨🇳_CN_中国_1
-  type: vmess
-  server: 112.132.215.108
-  port: 50002
-  uuid: 418048af-a293-4b99-9b0c-98ca3580dd24
-  alterId: 64
-  cipher: auto
-  tls: false
-  skip-cert-verify: true
   udp: true
 - name: ermaozi·🇵🇱_PL_波兰->🇧🇬_BG_保加利亚
   type: vmess
@@ -3154,16 +2546,6 @@ proxies:
   port: 2087
   uuid: b9fdc03f-389b-4cda-9be4-155b623bee15
   tls: true
-  skip-cert-verify: true
-  udp: true
-- name: ermaozi·🇨🇳_CN_中国->🇮🇪_IE_爱尔兰
-  type: vmess
-  server: v4.hdacd.com
-  port: 30804
-  uuid: cbb3f877-d1fb-344c-87a9-d153bffd5484
-  alterId: 2
-  cipher: auto
-  tls: false
   skip-cert-verify: true
   udp: true
 - alpn:
@@ -3240,16 +2622,6 @@ proxies:
   sni: www.bing.com
   tls: false
   type: hysteria2
-- name: ermaozi·@Begoo_VPN ²⁹⁰
-  obfs: salamander
-  obfs-password: dzcb7hv6i2kx2zze
-  password: 5bcodmhjtyfyyrqh
-  port: 36758
-  server: 91.142.73.159
-  skip-cert-verify: true
-  sni: cdn77.dmtr.ru
-  tls: false
-  type: hysteria2
 - name: ermaozi·Telegram:@v2rayng3
   obfs: salamander
   obfs-password: uw9b2qq5rx
@@ -3258,16 +2630,6 @@ proxies:
   server: 31.76.80.69
   skip-cert-verify: false
   sni: fiproxy1.lockdwn.com
-  tls: false
-  type: hysteria2
-- name: ermaozi·Telegram 🆔@Cnetvpn 🇺🇲
-  obfs: salamander
-  obfs-password: fuw2k1ddrouwxr3u
-  password: 8f0gvz5eul6omhq4
-  port: 52087
-  server: giftcard.gateway-stream.com
-  skip-cert-verify: false
-  sni: giftcard.gateway-stream.com
   tls: false
   type: hysteria2
 - name: ermaozi·🩵+@Azarakhsh_Proxy+🩷
@@ -3382,46 +2744,6 @@ proxies:
   sni: api.kermanshahi.org
   tls: false
   type: hysteria2
-- name: ermaozi·@vmess_ir
-  obfs: salamander
-  obfs-password: 7M4RXPFcQyQEGbkxBPfXo4bilMhCW2U9
-  password: eBTe6Ax2pUts8oMEWoYVDfnSlHfkLffQ
-  port: 5010
-  server: nas.aizhzo.com
-  skip-cert-verify: false
-  sni: nas.aizhzo.com
-  tls: false
-  type: hysteria2
-- name: ermaozi·♾️Join->🆔️@ATLAS_V2VPN🆓️📶‎🛰️63...
-  obfs: salamander
-  obfs-password: hfwq51con9efdxx6
-  password: f04i31zq8sy80v9b
-  port: 54280
-  server: r5ycmuko.zibayeman.com
-  skip-cert-verify: false
-  sni: r5ycmuko.zibayeman.com
-  tls: false
-  type: hysteria2
-- name: 'ermaozi·Telegram 🆔@Cnetvpn 🇺🇲 #1'
-  obfs: salamander
-  obfs-password: fuw2k1ddrouwxr3u
-  password: fmaznn1lrzys7ddy
-  port: 52076
-  server: giftcard.gateway-stream.com
-  skip-cert-verify: false
-  sni: giftcard.gateway-stream.com
-  tls: false
-  type: hysteria2
-- name: 'ermaozi·@vpnbaz🍂 #1'
-  obfs: salamander
-  obfs-password: rG07s3COMIEvdnQipRyWzx_H_2xygNC3
-  password: p7Q76LzlnS4hIzr1W3staBOnUe_WwSkR
-  port: 443
-  server: 130.49.161.70
-  skip-cert-verify: false
-  sni: hy2.aspidnet.xyz
-  tls: false
-  type: hysteria2
 - alpn:
   - h3
   client-fingerprint: chrome
@@ -3444,16 +2766,6 @@ proxies:
   sni: giftcard.gateway-stream.com
   tls: false
   type: hysteria2
-- name: ermaozi·@fastkanfig کانال تلگرام
-  obfs: salamander
-  obfs-password: b6d1f3888ab1d90dd11aac1dce427b81
-  password: tnnls
-  port: 443
-  server: bwdf2fnt.xn--e1aatfr8bwa.online
-  skip-cert-verify: false
-  sni: bwdf2fnt.xn--e1aatfr8bwa.online
-  tls: false
-  type: hysteria2
 - name: 'ermaozi·Telegram@vpnjey #7'
   obfs: salamander
   obfs-password: Telegram@vpnjey
@@ -3474,67 +2786,6 @@ proxies:
   sni: giftcard.gateway-stream.com
   tls: false
   type: hysteria2
-- name: ermaozi·🇦🇪[www.v2nodes.com] vless-AE-1...
-  network: ws
-  port: 14430
-  server: 95.174.68.188
-  tls: false
-  type: vless
-  uuid: 965ffbbe-c6b6-4d5f-8dea-6d8abc55d9c0
-  ws-opts:
-    headers:
-      Host: 95.174.68.188
-    path: /vless
-- name: 'ermaozi·🇦🇪[www.v2nodes.com] vless-AE-1... #1'
-  network: ws
-  port: 22573
-  server: 84.235.244.108
-  servername: uae.unixzone.us
-  tls: false
-  type: vless
-  uuid: 39947382-3212-41c9-bc3a-589574ac8b23
-  ws-opts:
-    headers:
-      Host: uae.unixzone.us
-    path: /
-- name: 'ermaozi·🇦🇪[www.v2nodes.com] vless-AE-1... #2'
-  network: ws
-  port: 2053
-  server: 147.78.0.186
-  servername: free.cndyw.ggff.net
-  tls: true
-  type: vless
-  uuid: 04c808e2-0b59-47b0-a54b-32fc7ef1c902
-  ws-opts:
-    headers:
-      Host: free.cndyw.ggff.net
-    path: pyip=bpb.yousef.isegaro.comfp=random
-- name: ermaozi·🇦🇱[www.v2nodes.com] vless-AL-1...
-  network: ws
-  port: 443
-  server: 89.125.139.115
-  servername: free.cndyw.ggff.net
-  tls: false
-  type: vless
-  uuid: 04c808e2-0b59-47b0-a54b-32fc7ef1c902
-  ws-opts:
-    headers:
-      Host: free.cndyw.ggff.net
-    path: pyip=bpb.yousef.isegaro.comfp=chromesecurity=tls
-- client-fingerprint: chrome
-  encryption: none
-  name: ermaozi·🏳[www.v2nodes.com] vless-
-  network: ws
-  port: 443
-  server: vl.cocopon.top
-  servername: vl.cocopon.top
-  tls: true
-  type: vless
-  uuid: 44f06ad1-982c-4e03-849f-899c1c8dc14f
-  ws-opts:
-    headers:
-      Host: vl.cocopon.top
-    path: /
 - client-fingerprint: unsafe
   encryption: none
   name: 'ermaozi·🇵🇱[www.v2nodes.com] vless-PL-1... #10'
@@ -3550,43 +2801,6 @@ proxies:
     headers:
       Host: ccc.010304.xyz
     path: /fp=chrome
-- client-fingerprint: chrome
-  name: 'ermaozi·🇧🇬[www.v2nodes.com] vless-BG-3... #3'
-  network: ws
-  port: 443
-  server: 155.103.71.142
-  servername: ccc.010304.xyz
-  tls: true
-  type: vless
-  uuid: d342d11e-d224-4463-b982-532309285094
-  ws-opts:
-    headers:
-      Host: ccc.010304.xyz
-    path: /fp=chrome
-- name: 'ermaozi·🇧🇬[www.v2nodes.com] vless-BG-3... #4'
-  network: ws
-  port: 443
-  server: 203.202.232.110
-  servername: vlso5.1d.mom
-  tls: true
-  type: vless
-  uuid: a1de0630-5786-48a0-84f6-dc6f2de10d6d
-  ws-opts:
-    headers:
-      Host: vlso5.1d.mom
-    path: /socks5=888:888@hkip.1d.mom:1080fp=chromefp=chrome
-- name: 'ermaozi·🇧🇷[www.v2nodes.com] vless-BR-1... #1'
-  network: ws
-  port: 443
-  server: cf.090227.xyz
-  servername: ccc.010304.xyz
-  tls: false
-  type: vless
-  uuid: d342d11e-d224-4463-b982-532309285094
-  ws-opts:
-    headers:
-      Host: ccc.010304.xyz
-    path: /fp=chromesecurity=tls
 - name: ermaozi·🇧🇾[www.v2nodes.com] vless-BY-1...
   network: ws
   port: 14430
@@ -3651,35 +2865,6 @@ proxies:
       Host: ccc.010304.xyz
     path: /fp=unsafe
 - client-fingerprint: chrome
-  encryption: none
-  name: ermaozi·🇸🇬[www.v2nodes.com] vless-SG
-  network: ws
-  port: 443
-  server: 172.64.152.241
-  servername: ccc.010304.xyz
-  tls: true
-  type: vless
-  uuid: d342d11e-d224-4463-b982-532309285094
-  ws-opts:
-    headers:
-      Host: ccc.010304.xyz
-    path: /fp=chrome
-- alpn:
-  - http/1.1
-  name: 'ermaozi·🇸🇬[www.v2nodes.com] vless-SG #1'
-  network: ws
-  port: 443
-  server: 188.114.96.9
-  servername: IdB8ONMVbntuYT5t7t6cEJfw8vLrb.paGEs.DeV
-  skip-cert-verify: false
-  tls: true
-  type: vless
-  uuid: 2e305ebe-f6e6-4689-b32f-cd04ab5ff541
-  ws-opts:
-    headers:
-      Host: idb8onmvbntuyt5t7t6cejfw8vlrb.pages.dev
-    path: /vl/9yvcoLdzdOXLUYfH7r5gwJhu1CHrjfp=chrome
-- client-fingerprint: chrome
   name: ermaozi·🇯🇵[www.v2nodes.com] vless-JP
   network: ws
   port: 443
@@ -3703,20 +2888,6 @@ proxies:
     headers:
       Host: vms.lifetime06.workers.dev
     path: /
-- client-fingerprint: unsafe
-  encryption: none
-  name: 'ermaozi·🇸🇬[www.v2nodes.com] vless-SG #3'
-  network: ws
-  port: 443
-  server: 104.18.45.38
-  servername: ccc.010304.xyz
-  tls: true
-  type: vless
-  uuid: d342d11e-d224-4463-b982-532309285094
-  ws-opts:
-    headers:
-      Host: ccc.010304.xyz
-    path: /?TELEGRAM--MARAMBASHI--MARAMBASHI--MARAMBASHI--MARAMBASHI?ed=2560
 - client-fingerprint: firefox
   encryption: none
   name: 'ermaozi·🇷🇺[www.v2nodes.com] vless-RU-1... #2'
@@ -3727,18 +2898,6 @@ proxies:
   tls: true
   type: vless
   uuid: 054362fb-e485-4a3f-9568-4c5b0f60e074
-- name: ermaozi·🇨🇱[www.v2nodes.com] vless-CL-1...
-  network: ws
-  port: 443
-  server: 131.255.6.88
-  servername: free.cndyw.ggff.net
-  tls: false
-  type: vless
-  uuid: 04c808e2-0b59-47b0-a54b-32fc7ef1c902
-  ws-opts:
-    headers:
-      Host: free.cndyw.ggff.net
-    path: pyip=bpb.yousef.isegaro.comfp=randomsecurity=tls
 - client-fingerprint: chrome
   encryption: none
   name: ermaozi·🇨🇾[www.v2nodes.com] vless-CY-1...
@@ -3753,19 +2912,6 @@ proxies:
     headers:
       Host: vlso5.1d.mom
     path: /socks5=888:888@hkip.1d.mom:1080
-- alpn:
-  - http/1.1
-  client-fingerprint: safari
-  name: 'ermaozi·🇩🇪[www.v2nodes.com] vless-DE-1... #2'
-  network: ws
-  port: 2083
-  server: 140.225.208.60
-  servername: speedtestmark.com
-  tls: true
-  type: vless
-  uuid: e3c3b722-1264-4cdc-a97c-b0a1bb73cd67
-  ws-opts:
-    path: /vless-ws
 - alpn:
   - http/1.1
   client-fingerprint: chrome
@@ -3948,72 +3094,6 @@ proxies:
     headers:
       Host: free.cndyw.ggff.net
     path: pyip=bpb.yousef.isegaro.comfp=chrome
-- client-fingerprint: chrome
-  name: ermaozi·🇭🇰[www.v2nodes.com] vless-HK-1...
-  network: ws
-  port: 1443
-  server: 38.76.180.144
-  servername: 38.76.180.144
-  tls: false
-  type: vless
-  uuid: d98b67d4-024a-4bba-91e2-e6ebece6df11
-  ws-opts:
-    headers:
-      Host: 38.76.180.144
-    path: /vless-ws
-- client-fingerprint: chrome
-  encryption: none
-  name: 'ermaozi·🇭🇰[www.v2nodes.com] vless-HK-1... #1'
-  network: ws
-  port: 443
-  server: px2.5ibtc.cn
-  servername: px2.5ibtc.cn
-  tls: true
-  type: vless
-  uuid: 326227e2-f2d1-4f43-8715-9da854f5f4c0
-  ws-opts:
-    headers:
-      Host: px2.5ibtc.cn
-    path: /326227e2-f2d1-4f43-8715-9da854f5f4c0
-- alpn:
-  - h2
-  - http/1.1
-  client-fingerprint: chrome
-  name: 'ermaozi·🇭🇰[www.v2nodes.com] vless-HK-1... #2'
-  port: 11907
-  server: 195.58.144.56
-  skip-cert-verify: false
-  tls: true
-  type: vless
-  uuid: 07cb07b9-0c4d-46c1-a15a-b147511b6b07
-- client-fingerprint: chrome
-  name: 'ermaozi·🏳[www.v2nodes.com] vless- #6'
-  network: ws
-  port: 8443
-  server: 103.148.73.173
-  servername: ty986gfazs.cainiaohub.xyz
-  tls: true
-  type: vless
-  uuid: c1c04450-bf71-4049-ad0c-9cf6d94d9f1f
-  ws-opts:
-    headers:
-      Host: ty986gfazs.cainiaohub.xyz
-    path: /81574b6b-c9d7-44a0-b83d-dad56e8cb530
-- client-fingerprint: chrome
-  encryption: none
-  name: ermaozi·🇲🇾[www.v2nodes.com] vless-MY-5...
-  network: ws
-  port: 443
-  server: 216.173.67.59
-  servername: ccc.010304.xyz
-  skip-cert-verify: false
-  tls: true
-  type: vless
-  uuid: d342d11e-d224-4463-b982-532309285094
-  ws-opts:
-    headers:
-      Host: ccc.010304.xyz
-    path: /
 - name: ermaozi·🇭🇺[www.v2nodes.com] vless-HU-6...
   network: ws
   port: 8443
@@ -4026,26 +3106,6 @@ proxies:
     headers:
       Host: free.cndyw.ggff.net
     path: pyip=bpb.yousef.isegaro.comfp=chrome
-- name: ermaozi·🇮🇳[www.v2nodes.com] vless-IN-1...
-  port: 443
-  server: 122.176.216.52
-  tls: false
-  type: vless
-  uuid: 16ae3ea5-cf3e-6973-7bf3-2b4b28d0ea88
-  ws-opts:
-    path: /ws/16ae3ea5-cf3e-6973-7bf3-2b4b28d0ea88
-- name: 'ermaozi·🇮🇳[www.v2nodes.com] vless-IN-1... #1'
-  network: ws
-  port: 14430
-  server: 13.140.56.100
-  servername: 13.140.56.100
-  tls: false
-  type: vless
-  uuid: 68512eac-cd53-4de3-8d1e-08f6e04af1a9
-  ws-opts:
-    headers:
-      Host: 13.140.56.100
-    path: /vless
 - client-fingerprint: chrome
   name: 'ermaozi·🇮🇳[www.v2nodes.com] vless-IN-1... #3'
   network: ws
@@ -4130,20 +3190,6 @@ proxies:
     headers:
       Host: mellow-pine-465b-4e9d050c.pages.dev
     path: /e47f26811455/proxyip=146.190.100.44?u=dailydoseofvpn
-- client-fingerprint: unsafe
-  encryption: none
-  name: 'ermaozi·🏳[www.v2nodes.com] vless- #8'
-  network: ws
-  port: 443
-  server: 104.21.70.21
-  servername: nautica-cff.kloningstrife002.workers.dev
-  tls: true
-  type: vless
-  uuid: fc60147e-76b8-4bc5-b691-90b2da79e3d2
-  ws-opts:
-    headers:
-      Host: nautica-cff.kloningstrife002.workers.dev
-    path: /138.2.74.219-28616
 - client-fingerprint: chrome
   name: ermaozi·🇯🇵[www.v2nodes.com] vless-JP-4...
   network: ws
@@ -4157,27 +3203,6 @@ proxies:
     headers:
       Host: kclx.eu.org
     path: /154.16.10.34-8080
-- name: ermaozi·🇰🇷[www.v2nodes.com] vless-KR-1...
-  network: ws
-  port: 25555
-  server: 152.69.226.63
-  tls: false
-  type: vless
-  uuid: 27c5483f-17f4-48ae-9a04-def53d88440d
-  ws-opts:
-    path: /
-- encryption: none
-  name: 'ermaozi·🏳[www.v2nodes.com] vless- #9'
-  network: ws
-  port: 8080
-  server: support.zoom.us
-  tls: false
-  type: vless
-  uuid: 990bf436-f1b9-4e7f-857d-14378acc4ae5
-  ws-opts:
-    headers:
-      Host: Free.nadun.store
-    path: /
 - name: ermaozi·🇱🇰[www.v2nodes.com] vless-LK-6...
   network: ws
   port: 8080
@@ -4189,17 +3214,6 @@ proxies:
     headers:
       Host: free.nadun.store
     path: /
-- client-fingerprint: ios
-  grpc-opts:
-    grpc-service-name: assets
-  name: ermaozi·🇲🇩[www.v2nodes.com] vless-MD-1...
-  network: grpc
-  port: 443
-  server: rus.play-cat.uk
-  servername: rus.play-cat.uk
-  tls: true
-  type: vless
-  uuid: 76ef5ab3-7075-4e23-b445-f3b1bd05d431
 - name: ermaozi·🇲🇩[www.v2nodes.com] vless-MD-4...
   network: ws
   port: 443
@@ -4225,22 +3239,6 @@ proxies:
     headers:
       Host: kclx.eu.org
     path: /154.16.10.34-8080
-- alpn:
-  - http/1.1
-  client-fingerprint: unsafe
-  encryption: none
-  name: ermaozi·🇲🇾[www.v2nodes.com] vless-MY-1...
-  network: ws
-  port: 443
-  server: 188.114.98.0
-  servername: vpn.cintaku.qzz.io
-  tls: true
-  type: vless
-  uuid: fc7d2cfe-f5ef-40c8-a848-a0bdc11f6349
-  ws-opts:
-    headers:
-      Host: vpn.cintaku.qzz.io
-    path: /vlessws
 - client-fingerprint: firefox
   encryption: none
   grpc-opts:
@@ -4253,17 +3251,6 @@ proxies:
   tls: true
   type: vless
   uuid: d86e6fda-e519-46ab-98eb-9ff9a9da5984
-- client-fingerprint: safari
-  grpc-opts:
-    grpc-service-name: 3e99d50d5740985d
-  name: 'ermaozi·🇳🇱[www.v2nodes.com] vless-NL-1... #2'
-  network: grpc
-  port: 443
-  server: 189.74.114.119
-  servername: api.mediaklenov.cc
-  tls: true
-  type: vless
-  uuid: abd5755a-8b77-4ed4-afbd-f2ccbc08e6f5
 - client-fingerprint: chrome
   encryption: none
   name: 'ermaozi·🇳🇱[www.v2nodes.com] vless-NL-1... #3'
@@ -4297,31 +3284,6 @@ proxies:
   tls: true
   type: vless
   uuid: 27653b37-603c-4c90-b1f5-25c4d23f8932
-- alpn:
-  - http/1.1
-  - h2
-  client-fingerprint: qq
-  name: ermaozi·🇵🇱[www.v2nodes.com] vless-PL-1...
-  network: tcp
-  port: 443
-  server: 87.242.119.253
-  servername: hvtlr-ru-47sb.fade.mom
-  tls: true
-  type: vless
-  uuid: aba9cdd4-026c-0001-87a9-9b3e5f24dd82
-  ws-opts:
-    path: /
-- client-fingerprint: firefox
-  grpc-opts:
-    grpc-service-name: beru-pl
-  name: 'ermaozi·🇵🇱[www.v2nodes.com] vless-PL-1... #4'
-  network: grpc
-  port: 8445
-  server: 77.232.135.141
-  servername: ru1.radiolumens.uk
-  tls: true
-  type: vless
-  uuid: 36cf792c-f07d-4500-97ea-a395e5178deb
 - encryption: none
   name: 'ermaozi·🇷🇴[www.v2nodes.com] vless-RO-1... #1'
   network: tcp
@@ -4348,31 +3310,6 @@ proxies:
     headers:
       Host: free.cndyw.ggff.net
     path: pyip=bpb.yousef.isegaro.comfp=random
-- alpn:
-  - h2
-  client-fingerprint: chrome
-  grpc-opts:
-    grpc-service-name: vlgrpc
-  name: 'ermaozi·🇷🇺[www.v2nodes.com] vless-RU-1... #3'
-  network: grpc
-  port: 443
-  server: 201.24.121.243
-  servername: kk-ru24a1.testkknegr.online
-  skip-cert-verify: false
-  tls: true
-  type: vless
-  uuid: 32b5ca9b-3f81-4031-965d-e8b074216e8d
-- client-fingerprint: random
-  grpc-opts:
-    grpc-service-name: grpc-ru
-  name: 'ermaozi·🇷🇺[www.v2nodes.com] vless-RU-1... #4'
-  network: grpc
-  port: 443
-  server: xsru1.ddnsfree.com
-  servername: xsru1.ddnsfree.com
-  tls: true
-  type: vless
-  uuid: c90395e6-2140-47ad-a54d-9b166729d3ef
 - name: 'ermaozi·🇸🇪[www.v2nodes.com] vless-SE-1... #1'
   network: ws
   port: 14430
@@ -4384,118 +3321,6 @@ proxies:
     headers:
       Host: 5.178.109.174
     path: /vless
-- client-fingerprint: chrome
-  name: ermaozi·🇸🇬[www.v2nodes.com] vless-SG-1...
-  port: 56984
-  server: sg1.zestapp778.com
-  servername: sg1.zestapp778.com
-  tls: true
-  type: vless
-  uuid: e9a8144e-5237-488a-afb1-9ca3d8d54c80
-- client-fingerprint: chrome
-  name: 'ermaozi·🇸🇬[www.v2nodes.com] vless-SG-1... #1'
-  network: tcp
-  port: 443
-  server: sg003.zestapp778.com
-  servername: sg003.zestapp778.com
-  tls: true
-  type: vless
-  uuid: e9a8144e-5237-488a-afb1-9ca3d8d54c80
-- name: 'ermaozi·🇸🇬[www.v2nodes.com] vless-SG-1... #2'
-  network: ws
-  port: 443
-  server: v2.drsachi.com
-  tls: false
-  type: vless
-  uuid: 270c3fa5-0293-4d68-875c-6cdc3bdc5b84
-- encryption: none
-  name: 'ermaozi·🏳[www.v2nodes.com] vless- #14'
-  network: ws
-  port: 2096
-  server: 139.162.27.96
-  servername: free-server.techsonic.dev
-  skip-cert-verify: false
-  tls: true
-  type: vless
-  uuid: 6e59d5c5-7aa3-4c36-a4c4-e3b899525ed2
-  ws-opts:
-    headers:
-      Host: free-server.techsonic.dev
-    path: /free-server.techsonic.dev
-- name: 'ermaozi·🇸🇬[www.v2nodes.com] vless-SG-1... #12'
-  port: 443
-  server: chatgpt.com
-  tls: false
-  type: vless
-  uuid: d342d11e-d224-4463-b982-532309285094
-  ws-opts:
-    path: /
-- encryption: none
-  name: ermaozi·🇸🇬[www.v2nodes.com] vless-SG-9...
-  network: ws
-  port: 8080
-  server: 172.67.75.172
-  tls: false
-  type: vless
-  uuid: 3e06b1db-2efb-446e-ba2d-68850dfd2f9d
-  ws-opts:
-    headers:
-      Host: bdfba-cool-tree-b580.v8fz4kbv.workers.dev
-    path: /
-- name: 'ermaozi·🇸🇬[www.v2nodes.com] vless-SG-9... #1'
-  network: ws
-  port: 8080
-  server: 104.18.0.181
-  tls: false
-  type: vless
-  uuid: e5cc16a6-ea42-46b2-82ae-ad2157e1641b
-  ws-opts:
-    headers:
-      Host: hhlfy.twiladaphne.ndjp.net
-    path: /
-- client-fingerprint: chrome
-  encryption: none
-  name: 'ermaozi·🇸🇬[www.v2nodes.com] vless-SG-9... #2'
-  network: ws
-  port: 8443
-  server: 190.93.245.187
-  servername: WQa3MIOjjR8fYOzhiui--sU3-uCG1Gdx.pAgEs.dEv
-  tls: true
-  type: vless
-  uuid: b2853d19-fada-44dc-8d44-967d1af122e0
-  ws-opts:
-    headers:
-      Host: wqa3miojjr8fyozhiui--su3-ucg1gdx.pages.dev
-    path: /eyJqdW5rIjoiZTA0TGg3eENkIiwicHJvdG9jb2wiOiJ2bCIsIm1vZGUiOiJwcmVmaXgiLCJwYW5lbElQcyI6WyJbMmEwMjo4OTg6MTQ2OjY0OjpdIl19
-- name: ermaozi·🇸🇬[www.v2nodes.com] vless-SG-8...
-  network: ws
-  port: 443
-  server: 43.174.193.1
-  servername: ccc.010304.xyz
-  skip-cert-verify: false
-  tls: true
-  type: vless
-  uuid: d342d11e-d224-4463-b982-532309285094
-  ws-opts:
-    headers:
-      Host: ccc.010304.xyz
-    path: /fp=chrome
-- name: 'ermaozi·🏳[www.v2nodes.com] vless- #16'
-  port: 443
-  server: 104.16.10.9
-  tls: false
-  type: vless
-  uuid: 3c52e091-6714-4915-949f-2149fe69951b
-  ws-opts:
-    path: /ws
-- name: 'ermaozi·🏳[www.v2nodes.com] vless- #17'
-  port: 42654
-  server: 206.1.101.85
-  tls: false
-  type: vless
-  uuid: 893845c5-8e4a-48d5-8a85-622f5b7ea950
-  ws-opts:
-    path: /
 - client-fingerprint: firefox
   name: 'ermaozi·🇹🇷[www.v2nodes.com] vless-TR-1... #1'
   network: ws
@@ -4507,19 +3332,6 @@ proxies:
   uuid: 4f34bc04-479c-49ba-91a8-6bb9ed15031c
   ws-opts:
     path: /vless-tr
-- client-fingerprint: chrome
-  name: 'ermaozi·🇹🇼[www.v2nodes.com] vless-TW-1... #1'
-  network: ws
-  port: 443
-  server: 60.248.219.53
-  servername: ty986gfazs.cainiaohub.xyz
-  tls: true
-  type: vless
-  uuid: c1c04450-bf71-4049-ad0c-9cf6d94d9f1f
-  ws-opts:
-    headers:
-      Host: ty986gfazs.cainiaohub.xyz
-    path: /81574b6b-c9d7-44a0-b83d-dad56e8cb530
 - client-fingerprint: chrome
   name: ermaozi·🇺🇸[www.v2nodes.com] vless-US-1...
   network: ws
@@ -4561,21 +3373,6 @@ proxies:
     headers:
       Host: fast.145779.xyz
     path: /ws-tesla
-- alpn:
-  - http/1.1
-  client-fingerprint: chrome
-  name: 'ermaozi·🏳[www.v2nodes.com] vless- #19'
-  network: ws
-  port: 443
-  server: cdn2.ir53.indevs.in
-  servername: cdn2.ir53.indevs.in
-  tls: true
-  type: vless
-  uuid: e9378202-c7db-4204-a41c-ce981fa927d4
-  ws-opts:
-    headers:
-      Host: cdn2.ir53.indevs.in
-    path: /varzesh3.com
 - name: 'ermaozi·🇺🇸[www.v2nodes.com] vless-US-1... #6'
   network: tcp
   port: 57259
@@ -4604,31 +3401,6 @@ proxies:
     headers:
       Host: usaaaaboijji.global.ssl.fastly.net
     path: /
-- name: ermaozi·🇻🇳[www.v2nodes.com] vless-VN-1...
-  network: tcp
-  port: 2086
-  server: 150.95.109.109
-  tls: false
-  type: vless
-  uuid: b83faafc-cbb7-4655-99d4-2c4c39a49d1b
-- name: 'ermaozi·🇻🇳[www.v2nodes.com] vless-VN-1... #1'
-  port: 51279
-  server: 154.21.203.106
-  tls: false
-  type: vless
-  uuid: 57beeeb0-03fc-4fc9-94da-7604488a7134
-- cipher: chacha20-ietf-poly1305
-  name: ermaozi·🏳[www.v2nodes.com] ss-
-  password: hTTg7lwQMzpaF7KXpY3A8w
-  port: 8388
-  server: alb.rvpn.app
-  type: ss
-- cipher: chacha20-ietf-poly1305
-  name: ermaozi·🇦🇱[www.v2nodes.com] ss-AL-1490...
-  password: cZGr8nLHdf+FE5ZAw0Y/Rzsml4AyikGL481Pg7eBpsI=
-  port: 43558
-  server: 130.49.189.158
-  type: ss
 - cipher: aes-256-gcm
   name: ermaozi·🇦🇹[www.v2nodes.com] ss-AT-1595...
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
@@ -4714,12 +3486,6 @@ proxies:
   server: 94.156.250.148
   type: ss
 - cipher: aes-256-gcm
-  name: ermaozi·🇮🇳[www.v2nodes.com] ss-IN-1561...
-  password: GEdoeeqLZtkJRgSa
-  port: 8388
-  server: 139.84.166.47
-  type: ss
-- cipher: aes-256-gcm
   name: ermaozi·🇮🇹[www.v2nodes.com] ss-IT-1602...
   password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
   port: 19999
@@ -4754,12 +3520,6 @@ proxies:
   password: shadowsocks
   port: 443
   server: 149.22.87.204
-  type: ss
-- cipher: aes-256-gcm
-  name: ermaozi·🇰🇷[www.v2nodes.com] ss-KR-1185...
-  password: Y6R9pAtvxxzmGC
-  port: 8888
-  server: 141.164.45.187
   type: ss
 - cipher: chacha20-ietf-poly1305
   name: ermaozi·🇳🇱[www.v2nodes.com] ss-NL-1604...
@@ -4809,12 +3569,6 @@ proxies:
   port: 443
   server: 154.46.31.106
   type: ss
-- cipher: aes-256-gcm
-  name: ermaozi·🇷🇺[www.v2nodes.com] ss-RU-1609...
-  password: NTiHBg64fsY8u8DbGrtypD9gPGSL386p
-  port: 18443
-  server: 185.22.155.121
-  type: ss
 - cipher: chacha20-ietf-poly1305
   name: ermaozi·🇸🇪[www.v2nodes.com] ss-SE-1608...
   password: MODziWLa9qMuW-4yPa0rfw
@@ -4827,40 +3581,6 @@ proxies:
   port: 8388
   server: 70.34.212.124
   type: ss
-- cipher: chacha20-ietf-poly1305
-  name: ermaozi·🇿🇦[www.v2nodes.com] ss-ZA-1534...
-  password: tfAcRikawhNoZAhu
-  port: 8388
-  server: 139.84.247.164
-  type: ss
-- cipher: chacha20-ietf-poly1305
-  name: 'ermaozi·🏳[www.v2nodes.com] ss- #5'
-  password: aduB9HGxQHjA2SBMRjkHX6
-  port: 443
-  server: 102.37.156.224
-  type: ss
-- cipher: chacha20-ietf-poly1305
-  name: ermaozi·🇿🇦[www.v2nodes.com] ss-ZA-1333...
-  password: Xsy8Ox4yOV3xLlpxtjzs3X
-  port: 16233
-  server: 102.133.165.160
-  type: ss
-- name: ermaozi·🇦🇺[www.v2nodes.com] trojan-AU-...
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  port: 443
-  server: 45.63.30.142
-  sni: connectwithemployerstohireyouridealteam.com
-  type: trojan
-- name: ermaozi·🇧🇷[www.v2nodes.com] trojan-BR-...
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  port: 443
-  server: 216.238.104.154
-  type: trojan
-- name: ermaozi·🇨🇱[www.v2nodes.com] trojan-CL-...
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  port: 443
-  server: 64.176.7.205
-  type: trojan
 - name: ermaozi·🏳[www.v2nodes.com] trojan-
   password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
   port: 443
@@ -4968,31 +3688,11 @@ proxies:
   skip-cert-verify: true
   sni: en001.zestapp778.com
   type: trojan
-- name: ermaozi·🇮🇱[www.v2nodes.com] trojan-IL-...
-  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
-  port: 443
-  server: 64.176.163.182
-  skip-cert-verify: true
-  sni: exploreeducationsectoropportunitiestodayandadvancecareers.com
-  type: trojan
-- name: ermaozi·🇮🇳[www.v2nodes.com] trojan-IN-...
-  password: 5t6i121em5lkmsmk
-  port: 42733
-  server: in002.zestapp778.com
-  skip-cert-verify: true
-  sni: in002.zestapp778.com
-  type: trojan
 - name: ermaozi·🇯🇵[www.v2nodes.com] trojan-JP-...
   password: e26a229d-e8f2-4ff9-8c7d-58a9d83ee437
   port: 8886
   server: 45.32.52.173
   sni: 45.32.52.173
-  type: trojan
-- name: ermaozi·🇲🇾[www.v2nodes.com] trojan-MY-...
-  password: 5931134d1cde66bf83a54acdfebe7ab2
-  port: 443
-  server: 47.250.84.25
-  sni: moltbot.doctoroyy.net
   type: trojan
 - alpn:
   - http/1.1
@@ -5043,26 +3743,6 @@ proxies:
     headers:
       Host: www.pleadcourt.org
     path: /assignment
-- alpn:
-  - http/1.1
-  name: 'ermaozi·🇳🇱[www.v2nodes.com] trojan-NL-... #4'
-  network: ws
-  password: humanity
-  port: 443
-  server: 219.76.13.177
-  skip-cert-verify: false
-  sni: www.pleadcourt.org
-  type: trojan
-  ws-opts:
-    headers:
-      Host: www.pleadcourt.org
-    path: '%2Fassignment'
-- name: 'ermaozi·🏳[www.v2nodes.com] trojan- #1'
-  password: e26a229d-e8f2-4ff9-8c7d-58a9d83ee437
-  port: 8886
-  server: 139.180.146.200
-  sni: 139.180.146.200
-  type: trojan
 - name: 'ermaozi·🇺🇸[www.v2nodes.com] trojan-US-... #4'
   password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
   port: 443
@@ -5103,75 +3783,6 @@ proxies:
   port: 443
   server: 63.180.254.10
   type: ss
-- alterId: 2
-  cipher: auto
-  name: ermaozi·🇭🇰 香港|@ripaojiedian
-  port: 30807
-  server: v10.hdacd.com
-  skip-cert-verify: false
-  tls: false
-  type: vmess
-  uuid: cbb3f877-d1fb-344c-87a9-d153bffd5484
-- alterId: 0
-  cipher: auto
-  name: ermaozi·🇭🇰 香港3|@ripaojiedian
-  network: ws
-  port: 443
-  server: ADncdOvLHR4M1P36.v.3dns.vip
-  servername: ADncdOvLHR4M1P36.v.3dns.vip
-  skip-cert-verify: false
-  tls: true
-  type: vmess
-  uuid: 88888888-8888-8888-8888-888888888888
-  ws-opts:
-    headers:
-      Host: ADncdOvLHR4M1P36.v.3dns.vip
-    path: /ws-vmess
-- alterId: 0
-  cipher: auto
-  name: ermaozi·🇭🇰 香港2|@ripaojiedian
-  network: ws
-  port: 443
-  server: kBONDXW9liFCi4h4.v.3dns.vip
-  servername: kBONDXW9liFCi4h4.v.3dns.vip
-  skip-cert-verify: false
-  tls: true
-  type: vmess
-  uuid: 88888888-8888-8888-8888-888888888888
-  ws-opts:
-    headers:
-      Host: kBONDXW9liFCi4h4.v.3dns.vip
-    path: /ws-vmess
-- alterId: 0
-  cipher: auto
-  name: ermaozi·🇭🇰 香港4|@ripaojiedian
-  network: ws
-  port: 443
-  server: aZW0eunYVdvRe73k.v.3dns.vip
-  servername: aZW0eunYVdvRe73k.v.3dns.vip
-  skip-cert-verify: false
-  tls: true
-  type: vmess
-  uuid: 88888888-8888-8888-8888-888888888888
-  ws-opts:
-    headers:
-      Host: aZW0eunYVdvRe73k.v.3dns.vip
-    path: /ws-vmess
-- alterId: 0
-  cipher: auto
-  name: ermaozi·🇭🇰 香港5|@ripaojiedian
-  network: ws
-  port: 443
-  server: syJ2gGUgMwBwQwQx.v.3dns.vip
-  servername: syJ2gGUgMwBwQwQx.v.3dns.vip
-  skip-cert-verify: false
-  tls: true
-  type: vmess
-  uuid: 88888888-8888-8888-8888-888888888888
-  ws-opts:
-    headers:
-      Host: syJ2gGUgMwBwQwQx.v.3dns.vip
-    path: /ws-vmess
 - alterId: 0
   cipher: auto
   name: ermaozi·🇯🇵 日本|@ripaojiedian
@@ -5219,51 +3830,6 @@ proxies:
     path: /ws-vmess
 - alterId: 0
   cipher: auto
-  name: ermaozi·🇸🇬 新加坡|@ripaojiedian
-  network: ws
-  port: 443
-  server: ASaqYIDZa9WDQ9Kq.v.3dns.vip
-  servername: ASaqYIDZa9WDQ9Kq.v.3dns.vip
-  skip-cert-verify: false
-  tls: true
-  type: vmess
-  uuid: 88888888-8888-8888-8888-888888888888
-  ws-opts:
-    headers:
-      Host: ASaqYIDZa9WDQ9Kq.v.3dns.vip
-    path: /ws-vmess
-- alterId: 0
-  cipher: auto
-  name: ermaozi·🇸🇬 新加坡2|@ripaojiedian
-  network: ws
-  port: 443
-  server: 6JiziO8PxQAXBAtZ.v.3dns.vip
-  servername: 6JiziO8PxQAXBAtZ.v.3dns.vip
-  skip-cert-verify: false
-  tls: true
-  type: vmess
-  uuid: 88888888-8888-8888-8888-888888888888
-  ws-opts:
-    headers:
-      Host: 6JiziO8PxQAXBAtZ.v.3dns.vip
-    path: /ws-vmess
-- alterId: 0
-  cipher: auto
-  name: ermaozi·🇰🇷 韩国|@ripaojiedian
-  network: ws
-  port: 443
-  server: 8nTzyR5KNivfabaT.v.3dns.vip
-  servername: 8nTzyR5KNivfabaT.v.3dns.vip
-  skip-cert-verify: false
-  tls: true
-  type: vmess
-  uuid: 88888888-8888-8888-8888-888888888888
-  ws-opts:
-    headers:
-      Host: 8nTzyR5KNivfabaT.v.3dns.vip
-    path: /ws-vmess
-- alterId: 0
-  cipher: auto
   name: ermaozi·🇺🇸 美国|@ripaojiedian
   network: ws
   port: 443
@@ -5292,51 +3858,11 @@ proxies:
     headers:
       Host: bJ1Aa2ZyJxYamYuK.v.3dns.vip
     path: /ws-vmess
-- name: ermaozi·香港2|@ripaojiedian
-  network: tcp
-  password: AA885B42-133C-3828-FB69-E45105C06092
-  port: 12103
-  server: 7d0a2gz0-7a0c.aws-agent.net
-  skip-cert-verify: true
-  sni: m.ctrip.com
-  type: trojan
-- name: ermaozi·香港3|@ripaojiedian
-  network: tcp
-  password: AA885B42-133C-3828-FB69-E45105C06092
-  port: 10115
-  server: 7d0a2gz0-7a0c.aws-agent.net
-  skip-cert-verify: true
-  sni: m.ctrip.com
-  type: trojan
-- name: ermaozi·香港4|@ripaojiedian
-  network: tcp
-  password: AA885B42-133C-3828-FB69-E45105C06092
-  port: 12107
-  server: 7d0a2gz0-7a0c.aws-agent.net
-  skip-cert-verify: true
-  sni: m.ctrip.com
-  type: trojan
-- name: ermaozi·香港5|@ripaojiedian
-  network: tcp
-  password: AA885B42-133C-3828-FB69-E45105C06092
-  port: 12102
-  server: 7d0a2gz0-7a0c.aws-agent.net
-  skip-cert-verify: true
-  sni: m.ctrip.com
-  type: trojan
 - name: ermaozi·日本2|@ripaojiedian
   network: tcp
   password: AA885B42-133C-3828-FB69-E45105C06092
   port: 10125
   server: 63182sh8-4d7b.aws-agent.net
-  skip-cert-verify: true
-  sni: m.ctrip.com
-  type: trojan
-- name: ermaozi·新加坡|@ripaojiedian
-  network: tcp
-  password: AA885B42-133C-3828-FB69-E45105C06092
-  port: 10135
-  server: 7d0a2gz0-7a0c.aws-agent.net
   skip-cert-verify: true
   sni: m.ctrip.com
   type: trojan
@@ -5352,22 +3878,6 @@ proxies:
   network: tcp
   password: AA885B42-133C-3828-FB69-E45105C06092
   port: 12122
-  server: 63182sh8-4d7b.aws-agent.net
-  skip-cert-verify: true
-  sni: m.ctrip.com
-  type: trojan
-- name: ermaozi·台湾|@ripaojiedian
-  network: tcp
-  password: AA885B42-133C-3828-FB69-E45105C06092
-  port: 12142
-  server: 7d0a2gz0-7a0c.aws-agent.net
-  skip-cert-verify: true
-  sni: m.ctrip.com
-  type: trojan
-- name: ermaozi·韩国|@ripaojiedian
-  network: tcp
-  password: AA885B42-133C-3828-FB69-E45105C06092
-  port: 11171
   server: 63182sh8-4d7b.aws-agent.net
   skip-cert-verify: true
   sni: m.ctrip.com
@@ -5392,13 +3902,6 @@ proxies:
   skip-cert-verify: true
   tls: true
   type: http
-- name: ermaozi·🇸🇬SG_1|1.8MB/s
-  password: '1234'
-  port: 2080
-  server: 47.129.174.248
-  skip-cert-verify: true
-  type: http
-  username: '1234'
 - name: ermaozi·🇮🇹IT_1|1.1MB/s
   password: None
   port: 443
@@ -5501,37 +4004,6 @@ proxies:
     mode: auto
     path: /setare
     x-padding-bytes: 100-1000
-- alterId: 0
-  cipher: auto
-  name: 'ermaozi·🇭🇰 香港 | HKG #2'
-  network: ws
-  port: 443
-  server: i2psm3knof5qjjix.v.3dns.vip
-  skip-cert-verify: true
-  tls: true
-  type: vmess
-  udp: true
-  uuid: f23bb427-c1f9-4373-876c-2f43e9f790f3
-  ws-opts:
-    headers:
-      Host: i2psm3knof5qjjix.v.3dns.vip
-    path: /ws-vmess
-- alterId: 0
-  cipher: auto
-  name: 'ermaozi·🇭🇰 香港 | HKG #4'
-  network: ws
-  port: 443
-  server: euu1yalfmcqvljex.v.3dns.vip
-  servername: euu1yalfmcqvljex.v.3dns.vip
-  skip-cert-verify: true
-  tls: true
-  type: vmess
-  udp: true
-  uuid: d237ab38-1974-4b36-94a3-0665ce8587b9
-  ws-opts:
-    headers:
-      Host: euu1yalfmcqvljex.v.3dns.vip
-    path: /ws-vmess
 - client-fingerprint: random
   name: 'ermaozi·🇮🇹 意大利 | ITA #1'
   network: ws
@@ -5546,29 +4018,6 @@ proxies:
     headers:
       Host: it-mil.862400.xyz
     path: /announcement?ed=2048
-- auth: 7e68e32f-8015-4f37-9082-70e8b0b58043
-  fingerprint: 89:61:86:FE:B2:0C:B7:40:31:87:A4:5F:F3:BD:5D:DC:8B:FB:DD:41:9D:77:9D:55:D7:86:18:9D:36:73:1A:69
-  name: 'ermaozi·🇰🇷 韩国 | KOR #1'
-  password: 7e68e32f-8015-4f37-9082-70e8b0b58043
-  port: 443
-  server: 3.36.61.213
-  skip-cert-verify: true
-  sni: www.bing.com
-  tls: false
-  type: hysteria2
-- name: ermaozi·🇰🇿 哈萨克斯坦 | KAZ
-  network: ws
-  password: humanity
-  port: 443
-  server: 185.234.114.165
-  skip-cert-verify: true
-  sni: www.cordweave.com
-  type: trojan
-  udp: true
-  ws-opts:
-    headers:
-      Host: www.cordweave.com
-    path: /assignment
 - name: ermaozi·🇳🇱 荷兰 | NLD 3
   network: ws
   password: humanity
@@ -5686,20 +4135,6 @@ proxies:
     headers:
       Host: www.cordweave.com
     path: /assignment
-- client-fingerprint: random
-  name: 'ermaozi·🇸🇬 新加坡 | SGP #1'
-  network: ws
-  port: 443
-  server: ct.877774.xyz
-  servername: ap-south.862400.xyz
-  tls: true
-  type: vless
-  udp: true
-  uuid: 4f735420-0179-45d7-ba4e-ed66d1bf3a89
-  ws-opts:
-    headers:
-      Host: ap-south.862400.xyz
-    path: /announcement?ed=2048
 - name: 'ermaozi·🇺🇸 美国 | USA #1'
   network: ws
   port: 8080
@@ -5757,20 +4192,6 @@ proxies:
     headers:
       Host: usa3.pad-service.com
     path: /U1SA
-- name: ermaozi·BR_speednode_0003
-  network: ws
-  port: 8443
-  server: de9.pad-sservice.lat
-  servername: de9.pad-sservice.lat
-  skip-cert-verify: false
-  tls: true
-  type: vless
-  udp: true
-  uuid: 2b0e5676-fb62-4bf0-9607-6e7818421e8e
-  ws-opts:
-    headers:
-      Host: de9.pad-service.com
-    path: /DE9W
 - name: ermaozi·DE_speednode_0004
   port: 443
   server: 213.109.163.119
@@ -6018,19 +4439,391 @@ proxies:
   client-fingerprint: firefox
   network: tcp
   udp: true
-- name: ermaozi·🇷🇺 俄罗斯 | RUS
-  server: 5.129.249.65
+- cipher: chacha20-ietf-poly1305
+  name: nmw·🇫🇮[www.v2nodes.com] ss-FI-1606...
+  password: x2A6AsyZ-rAllz0wbKHzWA
+  port: 8388
+  server: 178.253.16.185
+  type: ss
+- cipher: aes-256-gcm
+  name: nmw·🇫🇷[www.v2nodes.com] ss-FR-1609...
+  password: lF3nRjH58koKTe-_VtABbg
+  port: 20222
+  server: 51.75.118.5
+  type: ss
+- cipher: chacha20-ietf-poly1305
+  name: nmw·🇵🇱[www.v2nodes.com] ss-PL-1273...
+  password: 6heexyz
   port: 443
-  type: vless
-  uuid: a5212bcb-ab85-459a-bec6-9f259eeeebfa
-  tls: true
-  reality-opts:
-    public-key: iT-HgkPRUHl7Tm-LUWAGD-zoNoZSkVc-M9sscIIomHY
-    short-id: a62228a1c8b3378f
-  servername: rue.tems.bet
-  client-fingerprint: firefox
+  server: pl134.vpnbook.com
+  type: ss
+- name: nmw·🇨🇦[www.v2nodes.com] trojan-CA-...
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  port: 443
+  server: 216.152.147.89
+  type: trojan
+- name: 'nmw·🏳[www.v2nodes.com] trojan- #1'
   network: tcp
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  port: 443
+  server: 66.163.118.131
+  skip-cert-verify: false
+  sni: www.discovergreatjobsandadvanceyourcareer.com
+  type: trojan
+- name: nmw·🇺🇸[www.v2nodes.com] trojan-US-...
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  port: 443
+  server: 167.88.61.193
+  type: trojan
+- name: 'nmw·🇺🇸[www.v2nodes.com] trojan-US-... #1'
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  port: 443
+  server: 170.101.101.53
+  type: trojan
+- name: 'nmw·🇺🇸[www.v2nodes.com] trojan-US-... #7'
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  port: 443
+  server: 66.163.112.76
+  sni: api.unlockyourfuturefindyourperfectcareer.com
+  type: trojan
+- name: nmw·🇧🇪 比利时 | BEL
+  network: ws
+  password: humanity
+  port: 443
+  server: 141.98.233.6
+  skip-cert-verify: true
+  sni: www.cordweave.com
+  type: trojan
   udp: true
+  ws-opts:
+    headers:
+      Host: www.cordweave.com
+    path: /assignment
+- name: nmw·🇪🇸 西班牙 | ESP
+  network: ws
+  password: humanity
+  port: 8443
+  server: 185.114.72.31
+  skip-cert-verify: true
+  sni: www.cordweave.com
+  type: trojan
+  udp: true
+  ws-opts:
+    headers:
+      Host: www.cordweave.com
+    path: /assignment
+- name: nmw·🇳🇱 荷兰 | NLD
+  network: ws
+  password: humanity
+  port: 443
+  server: 179.255.99.31
+  skip-cert-verify: true
+  sni: www.cordweave.com
+  type: trojan
+  udp: true
+  ws-opts:
+    headers:
+      Host: www.cordweave.com
+    path: /assignment
+- name: nmw·🇳🇱 荷兰 | NLD 3
+  network: ws
+  password: humanity
+  port: 443
+  server: 188.255.156.209
+  skip-cert-verify: true
+  sni: www.cordweave.com
+  type: trojan
+  udp: true
+  ws-opts:
+    headers:
+      Host: www.cordweave.com
+    path: /assignment
+- name: nmw·🇳🇱 荷兰 | NLD 4
+  network: ws
+  password: humanity
+  port: 443
+  server: 213.165.55.4
+  skip-cert-verify: true
+  sni: www.cordweave.com
+  type: trojan
+  udp: true
+  ws-opts:
+    headers:
+      Host: www.cordweave.com
+    path: /assignment
+- name: nmw·🇳🇱 荷兰 | NLD 5
+  network: ws
+  password: humanity
+  port: 443
+  server: 179.255.126.253
+  skip-cert-verify: true
+  sni: www.cordweave.com
+  type: trojan
+  udp: true
+  ws-opts:
+    headers:
+      Host: www.cordweave.com
+    path: /assignment
+- name: nmw·🇳🇱 荷兰 | NLD 6
+  network: ws
+  password: humanity
+  port: 443
+  server: 52.194.44.56
+  skip-cert-verify: true
+  sni: www.cordweave.com
+  type: trojan
+  udp: true
+  ws-opts:
+    headers:
+      Host: www.cordweave.com
+    path: /assignment
+- name: nmw·🇳🇱 荷兰 | NLD 7
+  network: ws
+  password: humanity
+  port: 443
+  server: 179.253.241.115
+  skip-cert-verify: true
+  sni: www.cordweave.com
+  type: trojan
+  udp: true
+  ws-opts:
+    headers:
+      Host: www.cordweave.com
+    path: /assignment
+- name: nmw·🇳🇱 荷兰 | NLD 9
+  network: ws
+  password: humanity
+  port: 443
+  server: 212.2.227.187
+  skip-cert-verify: true
+  sni: www.cordweave.com
+  type: trojan
+  udp: true
+  ws-opts:
+    headers:
+      Host: www.cordweave.com
+    path: /assignment
+- name: nmw·🇳🇱 荷兰 | NLD 11
+  network: ws
+  password: humanity
+  port: 443
+  server: 179.255.111.93
+  skip-cert-verify: true
+  sni: www.cordweave.com
+  type: trojan
+  udp: true
+  ws-opts:
+    headers:
+      Host: www.cordweave.com
+    path: /assignment
+- name: nmw·🇳🇱 荷兰 | NLD 12
+  network: ws
+  password: humanity
+  port: 443
+  server: 172.104.81.253
+  skip-cert-verify: true
+  sni: www.cordweave.com
+  type: trojan
+  udp: true
+  ws-opts:
+    headers:
+      Host: www.cordweave.com
+    path: /assignment
+- name: nmw·🇳🇱 荷兰 | NLD 13
+  network: ws
+  password: humanity
+  port: 443
+  server: 93.86.12.49
+  skip-cert-verify: true
+  sni: www.cordweave.com
+  type: trojan
+  udp: true
+  ws-opts:
+    headers:
+      Host: www.cordweave.com
+    path: /assignment
+- name: nmw·🇳🇱 荷兰 | NLD 14
+  network: ws
+  password: humanity
+  port: 443
+  server: 173.242.51.189
+  skip-cert-verify: true
+  sni: www.cordweave.com
+  type: trojan
+  udp: true
+  ws-opts:
+    headers:
+      Host: www.cordweave.com
+    path: /assignment
+- name: nmw·🇳🇱 荷兰 | NLD 15
+  network: ws
+  password: humanity
+  port: 443
+  server: 153.56.171.216
+  skip-cert-verify: true
+  sni: www.cordweave.com
+  type: trojan
+  udp: true
+  ws-opts:
+    headers:
+      Host: www.cordweave.com
+    path: /assignment
+- name: nmw·🇳🇱 荷兰 | NLD 19
+  network: ws
+  password: humanity
+  port: 2053
+  server: 178.104.197.49
+  skip-cert-verify: true
+  sni: www.cordweave.com
+  type: trojan
+  udp: true
+  ws-opts:
+    headers:
+      Host: www.cordweave.com
+    path: /assignment
+- name: nmw·🇳🇱 荷兰 | NLD 20
+  network: ws
+  password: humanity
+  port: 443
+  server: 35.241.172.224
+  skip-cert-verify: true
+  sni: www.cordweave.com
+  type: trojan
+  udp: true
+  ws-opts:
+    headers:
+      Host: www.cordweave.com
+    path: /assignment
+- name: nmw·🇳🇱 荷兰 | NLD 21
+  network: ws
+  password: humanity
+  port: 443
+  server: 179.255.127.92
+  skip-cert-verify: true
+  sni: www.cordweave.com
+  type: trojan
+  udp: true
+  ws-opts:
+    headers:
+      Host: www.cordweave.com
+    path: /assignment
+- name: nmw·🇳🇱 荷兰 | NLD 23
+  network: ws
+  password: humanity
+  port: 443
+  server: 179.255.102.54
+  skip-cert-verify: true
+  sni: www.cordweave.com
+  type: trojan
+  udp: true
+  ws-opts:
+    headers:
+      Host: www.cordweave.com
+    path: /assignment
+- name: nmw·🇳🇱 荷兰 | NLD 24
+  network: ws
+  password: humanity
+  port: 443
+  server: 179.255.115.22
+  skip-cert-verify: true
+  sni: www.cordweave.com
+  type: trojan
+  udp: true
+  ws-opts:
+    headers:
+      Host: www.cordweave.com
+    path: /assignment
+- name: nmw·🇳🇱 荷兰 | NLD 27
+  network: ws
+  password: humanity
+  port: 2053
+  server: 194.135.119.82
+  skip-cert-verify: true
+  sni: www.cordweave.com
+  type: trojan
+  udp: true
+  ws-opts:
+    headers:
+      Host: www.cordweave.com
+    path: /assignment
+- name: nmw·🇳🇱 荷兰 | NLD 28
+  network: ws
+  password: humanity
+  port: 8443
+  server: 202.61.226.121
+  skip-cert-verify: true
+  sni: www.cordweave.com
+  type: trojan
+  udp: true
+  ws-opts:
+    headers:
+      Host: www.cordweave.com
+    path: /assignment
+- name: nmw·🇳🇱 荷兰 | NLD 31
+  network: ws
+  password: humanity
+  port: 443
+  server: 179.255.132.69
+  skip-cert-verify: true
+  sni: www.cordweave.com
+  type: trojan
+  udp: true
+  ws-opts:
+    headers:
+      Host: www.cordweave.com
+    path: /assignment
+- name: nmw·🇳🇱 荷兰 | NLD 32
+  network: ws
+  password: humanity
+  port: 443
+  server: 208.68.180.204
+  skip-cert-verify: true
+  sni: www.cordweave.com
+  type: trojan
+  udp: true
+  ws-opts:
+    headers:
+      Host: www.cordweave.com
+    path: /assignment
+- name: nmw·🇳🇱 荷兰 | NLD 33
+  network: ws
+  password: humanity
+  port: 443
+  server: 23.246.154.144
+  skip-cert-verify: true
+  sni: www.cordweave.com
+  type: trojan
+  udp: true
+  ws-opts:
+    headers:
+      Host: www.cordweave.com
+    path: /assignment
+- name: nmw·🇳🇱 荷兰 | NLD 36
+  network: ws
+  password: humanity
+  port: 443
+  server: 179.255.127.209
+  skip-cert-verify: true
+  sni: www.cordweave.com
+  type: trojan
+  udp: true
+  ws-opts:
+    headers:
+      Host: www.cordweave.com
+    path: /assignment
+- name: nmw·🇺🇸 美国 | USA 5
+  network: ws
+  password: humanity
+  port: 443
+  server: 179.255.136.143
+  skip-cert-verify: true
+  sni: www.cordweave.com
+  type: trojan
+  udp: true
+  ws-opts:
+    headers:
+      Host: www.cordweave.com
+    path: /assignment
 - name: pass·JP_speednode_0018
   server: funagfrdfs.alixxplay.com
   port: 46105
@@ -6062,76 +4855,6 @@ proxies:
     short-id: 54cca3c1c1c7
   network: tcp
   udp: true
-- name: pass·RU_speednode_0029
-  server: 147.45.47.119
-  port: 443
-  type: vless
-  uuid: bcf07b50-9da7-44dc-a955-43302f12e1e5
-  flow: xtls-rprx-vision
-  tls: true
-  skip-cert-verify: false
-  client-fingerprint: firefox
-  servername: ozon.ru
-  reality-opts:
-    public-key: SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc
-  network: tcp
-  udp: true
-- name: pass·RU_speednode_0030
-  server: 45.151.71.145
-  port: 443
-  type: vless
-  uuid: 04edf721-b2b7-4a80-9fbd-c949438c58c9
-  flow: xtls-rprx-vision
-  tls: true
-  skip-cert-verify: false
-  client-fingerprint: firefox
-  servername: abuse.ozon.ru
-  reality-opts:
-    public-key: SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc
-  network: tcp
-  udp: true
-- name: pass·RU_speednode_0031
-  server: 147.45.47.117
-  port: 443
-  type: vless
-  uuid: bcf07b50-9da7-44dc-a955-43302f12e1e5
-  flow: xtls-rprx-vision
-  tls: true
-  skip-cert-verify: false
-  client-fingerprint: firefox
-  servername: ozon.ru
-  reality-opts:
-    public-key: SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc
-  network: tcp
-  udp: true
-- name: pass·RU_speednode_0032
-  server: 45.151.71.159
-  port: 443
-  type: vless
-  uuid: 680e92ac-1688-49e0-af96-7327fbc30ce8
-  flow: xtls-rprx-vision
-  tls: true
-  skip-cert-verify: false
-  client-fingerprint: firefox
-  servername: gb.ozon.ru
-  reality-opts:
-    public-key: SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc
-  network: tcp
-  udp: true
-- name: pass·RU_speednode_0033
-  server: 45.151.71.176
-  port: 443
-  type: vless
-  uuid: bcf07b50-9da7-44dc-a955-43302f12e1e5
-  flow: xtls-rprx-vision
-  tls: true
-  skip-cert-verify: false
-  client-fingerprint: firefox
-  servername: gb.ozon.ru
-  reality-opts:
-    public-key: SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc
-  network: tcp
-  udp: true
 - name: pass·RU_speednode_0034
   server: 92.42.201.107
   port: 443
@@ -6147,114 +4870,6 @@ proxies:
     short-id: 88d9dc52ef39c8bd
   network: tcp
   udp: true
-- name: pass·RU_speednode_0035
-  server: 147.45.46.183
-  port: 443
-  type: vless
-  uuid: bcf07b50-9da7-44dc-a955-43302f12e1e5
-  flow: xtls-rprx-vision
-  tls: true
-  skip-cert-verify: false
-  client-fingerprint: firefox
-  servername: gb.ozon.ru
-  reality-opts:
-    public-key: SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc
-  network: tcp
-  udp: true
-- name: pass·RU_speednode_0036
-  server: 45.151.71.167
-  port: 443
-  type: vless
-  uuid: 680e92ac-1688-49e0-af96-7327fbc30ce8
-  flow: xtls-rprx-vision
-  tls: true
-  skip-cert-verify: false
-  client-fingerprint: chrome
-  servername: abuse.ozon.ru
-  reality-opts:
-    public-key: SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc
-  network: tcp
-  udp: true
-- name: pass·RU_speednode_0037
-  server: 37.235.249.12
-  port: 443
-  type: vless
-  uuid: bcf07b50-9da7-44dc-a955-43302f12e1e5
-  flow: xtls-rprx-vision
-  tls: true
-  skip-cert-verify: false
-  client-fingerprint: firefox
-  servername: gb.ozon.ru
-  reality-opts:
-    public-key: SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc
-  network: tcp
-  udp: true
-- name: pass·TR_speednode_0038
-  server: 193.160.141.27
-  port: 443
-  type: vless
-  uuid: fd0a5c32-afc0-4d57-b95a-ca6ec8f93e87
-  flow: xtls-rprx-vision
-  tls: true
-  skip-cert-verify: false
-  client-fingerprint: chrome
-  servername: abuse.ozon.ru
-  reality-opts:
-    public-key: SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc
-  network: tcp
-  udp: true
-
-proxy-providers:
-  wz:
-    type: http
-    url: "https://raw.githubusercontent.com/wz-node/free-nodes/main/clash.yaml"
-    path: ./providers/wz.yaml
-    interval: 21600
-    health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300, lazy: true}
-  free18:
-    type: http
-    url: "https://raw.githubusercontent.com/free18/v2ray/main/c.yaml"
-    path: ./providers/free18.yaml
-    interval: 21600
-    health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300, lazy: true}
-  free18-jsd:
-    type: http
-    url: "https://cdn.jsdelivr.net/gh/free18/v2ray@main/c.yaml"
-    path: ./providers/free18-jsd.yaml
-    interval: 21600
-    override: {additional-prefix: "镜像·"}
-    health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300, lazy: true}
-  ermaozi:
-    type: http
-    url: "https://raw.githubusercontent.com/ermaozi/get_subscribe/main/subscribe/clash.yml"
-    path: ./providers/ermaozi.yaml
-    interval: 21600
-    health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300, lazy: true}
-  ermaozi-jsd:
-    type: http
-    url: "https://cdn.jsdelivr.net/gh/ermaozi/get_subscribe@main/subscribe/clash.yml"
-    path: ./providers/ermaozi-jsd.yaml
-    interval: 21600
-    override: {additional-prefix: "镜像·"}
-    health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300, lazy: true}
-  nomorewalls:
-    type: http
-    url: "https://raw.githubusercontent.com/peasoft/NoMoreWalls/master/list.yml"
-    path: ./providers/nomorewalls.yaml
-    interval: 21600
-    health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300, lazy: true}
-  passcro:
-    type: http
-    url: "https://raw.githubusercontent.com/zhangkaiitugithub/passcro/main/speednodes.yaml"
-    path: ./providers/passcro.yaml
-    interval: 21600
-    health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300, lazy: true}
-  pawdroid:
-    type: http
-    url: "https://raw.githubusercontent.com/Pawdroid/Free-servers/main/sub"
-    path: ./providers/pawdroid.yaml
-    interval: 21600
-    health-check: {enable: true, url: https://www.gstatic.com/generate_204, interval: 300, lazy: true}
 proxy-groups:
 - name: 🚀 节点选择
   type: select
@@ -6267,15 +4882,10 @@ proxy-groups:
   proxies: &id001
   - wz·🇺🇸 美国_03 - wanzhuanmi.com
   - wz·🇺🇸 美国_04 - wanzhuanmi.com
-  - wz·🇭🇰 香港_01 - wanzhuanmi.com
-  - wz·🇷🇺 俄罗斯_01 - wanzhuanmi.com
   - wz·🇺🇸 美国_01 - wanzhuanmi.com
   - wz·🇫🇮 芬兰_01 - wanzhuanmi.com
-  - wz·🇷🇺 俄罗斯_02 - wanzhuanmi.com
   - wz·🇳🇱 荷兰_01 - wanzhuanmi.com
   - wz·🇵🇱 波兰_01 - wanzhuanmi.com
-  - wz·🇳🇱 荷兰_03 - wanzhuanmi.com
-  - wz·🇰🇿 哈萨克斯坦_01 - wanzhuanmi.com
   - wz·🇸🇪 瑞典_01 - wanzhuanmi.com
   - wz·🇩🇪 德国_01 - wanzhuanmi.com
   - wz·🇮🇹 意大利_01 - wanzhuanmi.com
@@ -6287,9 +4897,6 @@ proxy-groups:
   - wz·🇮🇹 意大利_07 - wanzhuanmi.com
   - wz·🇮🇹 意大利_02 - wanzhuanmi.com
   - wz·🇺🇸 美国_02 - wanzhuanmi.com
-  - wz·🇳🇱 荷兰_02 - wanzhuanmi.com
-  - free18·每天更新，请加电报群防止失联
-  - free18·美国 (71)
   - free18·美国 (73)
   - free18·美国
   - free18·美国 (2)
@@ -6316,13 +4923,11 @@ proxy-groups:
   - free18·荷兰
   - free18·美国 (20)
   - free18·荷兰 (2)
-  - free18·俄罗斯
   - free18·德国 (2)
   - free18·美国 (22)
   - free18·美国 (23)
   - free18·美国 (25)
   - free18·美国 (26)
-  - free18·俄罗斯 (2)
   - free18·美国 (27)
   - free18·美国 (28)
   - free18·美国 (29)
@@ -6333,16 +4938,12 @@ proxy-groups:
   - free18·美国 (32)
   - free18·美国 (33)
   - free18·美国 (34)
-  - free18·美国 (35)
   - free18·美国 (36)
-  - free18·香港
   - free18·法国
   - free18·意大利
-  - free18·俄罗斯 (3)
   - free18·美国 (37)
   - free18·美国 (38)
   - free18·美国 (39)
-  - free18·泰国
   - free18·美国 (42)
   - free18·日本 (2)
   - free18·美国 (43)
@@ -6362,11 +4963,9 @@ proxy-groups:
   - free18·美国 (56)
   - free18·美国 (57)
   - free18·美国 (58)
-  - free18·香港 (2)
   - free18·美国 (59)
   - free18·美国 (60)
   - free18·荷兰 (3)
-  - free18·香港 (3)
   - free18·美国 (62)
   - free18·西班牙
   - free18·美国 (63)
@@ -6376,46 +4975,28 @@ proxy-groups:
   - free18·荷兰 (4)
   - free18·美国 (66)
   - free18·美国 (67)
-  - free18·香港 (4)
-  - free18·韩国
-  - free18·韩国 (2)
   - free18·美国 (69)
   - free18·美国 (70)
-  - free18·新加坡
-  - free18·新加坡 (2)
   - free18·日本 (4)
-  - free18·🇭🇰香港 02
   - free18·🇫🇷法国
   - free18·🇸🇪瑞典
   - free18·🇲🇽墨西哥
-  - free18·🇦🇺澳大利亚
   - free18·🇩🇪德国 01
   - free18·🇨🇭瑞士
-  - free18·🇹🇷土耳其
   - free18·🇨🇿捷克
   - free18·🇵🇹葡萄牙
   - free18·🇫🇮芬兰
-  - free18·🇸🇰斯洛伐克
   - free18·🇭🇺匈牙利
   - free18·🇧🇬保加利亚
-  - free18·🇷🇴罗马尼亚
   - free18·🇧🇾白俄罗斯
   - free18·🇺🇦乌克兰
   - free18·🇲🇩摩尔多瓦 01
   - free18·🇲🇩摩尔多瓦 02
-  - free18·🇰🇿哈萨克斯坦 01
-  - free18·🇰🇿哈萨克斯坦 02
-  - free18·🇸🇬新加坡 01
-  - free18·🇲🇾马来西亚
-  - free18·🇻🇳越南 01
-  - free18·🇻🇳越南 02
   - free18·🇮🇳印度
   - free18·🇭🇰香港 04
   - free18·🇭🇰香港 05
   - free18·🇭🇰香港 06
   - free18·🇯🇵日本 01
-  - free18·🇸🇬新加坡 02
-  - free18·🇺🇸美国 03
   - free18·🇺🇸美国 04
   - free18·🇺🇸美国 05
   - free18·🇨🇦加拿大 01
@@ -6470,18 +5051,11 @@ proxy-groups:
   - free18·🇯🇵日本 03
   - free18·🇯🇵日本 04
   - free18·🇯🇵日本 05
-  - free18·🇸🇬新加坡 03
-  - free18·🇸🇬新加坡 04
-  - free18·🇸🇬新加坡 05
-  - free18·🇭🇰香港 07
   - free18·🇭🇰香港 08
   - free18·🇭🇰香港 09
   - free18·🇺🇸美国 06
   - free18·🇺🇸美国 07
   - free18·🇺🇸美国 08
-  - free18·🇰🇷韩国 01
-  - free18·🇰🇷韩国 02
-  - free18·🇰🇷韩国 03
   - free18·🇩🇪德国 02
   - free18·🇩🇪德国 03
   - free18·🇩🇪德国 04
@@ -6493,19 +5067,13 @@ proxy-groups:
   - free18·🇩🇪德国 10
   - free18·🇩🇪德国 11
   - free18·🇺🇸美国 10
-  - free18·🇭🇰香港 12
   - ermaozi·🇩🇪_DE_德国
   - ermaozi·🇨🇳_CN_中国->🇺🇸_US_美国_1
   - ermaozi·🇺🇸_US_美国
-  - ermaozi·🇨🇳_CN_中国->🇳🇱_NL_荷兰
-  - ermaozi·🇨🇳_CN_中国
-  - ermaozi·🇨🇳_CN_中国->🇫🇷_FR_法国
-  - ermaozi·🇨🇳_CN_中国_1
   - ermaozi·🇵🇱_PL_波兰->🇧🇬_BG_保加利亚
   - ermaozi·🇨🇳_CN_中国->🇯🇵_JP_日本
   - ermaozi·🇯🇵_JP_日本
   - ermaozi·🇵🇱_PL_波兰
-  - ermaozi·🇨🇳_CN_中国->🇮🇪_IE_爱尔兰
   - ermaozi·https://github.com/*********-*...
   - 'ermaozi·github.com/*********-******/**... #1'
   - ermaozi·@KAFING_2
@@ -6513,9 +5081,7 @@ proxy-groups:
   - ermaozi·@tootffarangi🍓
   - ermaozi·🇳🇱NL_3|1.4MB/s
   - ermaozi·🇫🇷203919 | ⚡️Telegram = t.me/S...
-  - ermaozi·@Begoo_VPN ²⁹⁰
   - ermaozi·Telegram:@v2rayng3
-  - ermaozi·Telegram 🆔@Cnetvpn 🇺🇲
   - ermaozi·🩵+@Azarakhsh_Proxy+🩷
   - 'ermaozi·Channel : @Daily_Configs'
   - ermaozi·Telegram@vpnjey
@@ -6527,39 +5093,21 @@ proxy-groups:
   - 'ermaozi·Telegram@vpnjey #6'
   - ermaozi·🇳🇱 - NL - @FreeOnlineVPN
   - 'ermaozi·@KAFING_2 #2'
-  - ermaozi·@vmess_ir
-  - ermaozi·♾️Join->🆔️@ATLAS_V2VPN🆓️📶‎🛰️63...
-  - 'ermaozi·Telegram 🆔@Cnetvpn 🇺🇲 #1'
-  - 'ermaozi·@vpnbaz🍂 #1'
   - ermaozi·🇱🇻hysteria
   - ermaozi·Telegram 🆔@cnetvpn 🇳🇱
-  - ermaozi·@fastkanfig کانال تلگرام
   - 'ermaozi·Telegram@vpnjey #7'
   - ermaozi·Telegram 🆔@cnetvpn 🇸🇪
-  - ermaozi·🇦🇪[www.v2nodes.com] vless-AE-1...
-  - 'ermaozi·🇦🇪[www.v2nodes.com] vless-AE-1... #1'
-  - 'ermaozi·🇦🇪[www.v2nodes.com] vless-AE-1... #2'
-  - ermaozi·🇦🇱[www.v2nodes.com] vless-AL-1...
-  - ermaozi·🏳[www.v2nodes.com] vless-
   - 'ermaozi·🇵🇱[www.v2nodes.com] vless-PL-1... #10'
-  - 'ermaozi·🇧🇬[www.v2nodes.com] vless-BG-3... #3'
-  - 'ermaozi·🇧🇬[www.v2nodes.com] vless-BG-3... #4'
-  - 'ermaozi·🇧🇷[www.v2nodes.com] vless-BR-1... #1'
   - ermaozi·🇧🇾[www.v2nodes.com] vless-BY-1...
   - 'ermaozi·🇧🇾[www.v2nodes.com] vless-BY-1... #1'
   - 'ermaozi·🇧🇾[www.v2nodes.com] vless-BY-1... #2'
   - 'ermaozi·🇨🇦[www.v2nodes.com] vless-CA-1... #1'
   - 'ermaozi·🇨🇦[www.v2nodes.com] vless-CA-1... #4'
   - ermaozi·🇳🇱[www.v2nodes.com] vless-NL
-  - ermaozi·🇸🇬[www.v2nodes.com] vless-SG
-  - 'ermaozi·🇸🇬[www.v2nodes.com] vless-SG #1'
   - ermaozi·🇯🇵[www.v2nodes.com] vless-JP
   - 'ermaozi·🇸🇬[www.v2nodes.com] vless-SG #2'
-  - 'ermaozi·🇸🇬[www.v2nodes.com] vless-SG #3'
   - 'ermaozi·🇷🇺[www.v2nodes.com] vless-RU-1... #2'
-  - ermaozi·🇨🇱[www.v2nodes.com] vless-CL-1...
   - ermaozi·🇨🇾[www.v2nodes.com] vless-CY-1...
-  - 'ermaozi·🇩🇪[www.v2nodes.com] vless-DE-1... #2'
   - 'ermaozi·🇩🇪[www.v2nodes.com] vless-DE-1... #3'
   - 'ermaozi·🇩🇪[www.v2nodes.com] vless-DE-1... #4'
   - 'ermaozi·🇩🇪[www.v2nodes.com] vless-DE-1... #8'
@@ -6578,14 +5126,7 @@ proxy-groups:
   - 'ermaozi·🇬🇧[www.v2nodes.com] vless-GB-1... #5'
   - 'ermaozi·🇬🇧[www.v2nodes.com] vless-GB-1... #7'
   - ermaozi·🇬🇷[www.v2nodes.com] vless-GR-3...
-  - ermaozi·🇭🇰[www.v2nodes.com] vless-HK-1...
-  - 'ermaozi·🇭🇰[www.v2nodes.com] vless-HK-1... #1'
-  - 'ermaozi·🇭🇰[www.v2nodes.com] vless-HK-1... #2'
-  - 'ermaozi·🏳[www.v2nodes.com] vless- #6'
-  - ermaozi·🇲🇾[www.v2nodes.com] vless-MY-5...
   - ermaozi·🇭🇺[www.v2nodes.com] vless-HU-6...
-  - ermaozi·🇮🇳[www.v2nodes.com] vless-IN-1...
-  - 'ermaozi·🇮🇳[www.v2nodes.com] vless-IN-1... #1'
   - 'ermaozi·🇮🇳[www.v2nodes.com] vless-IN-1... #3'
   - 'ermaozi·🇮🇹[www.v2nodes.com] vless-IT-1... #2'
   - ermaozi·🇮🇹[www.v2nodes.com] vless-IT-7...
@@ -6594,52 +5135,25 @@ proxy-groups:
   - 'ermaozi·🏳[www.v2nodes.com] vless- #7'
   - 'ermaozi·🇯🇵[www.v2nodes.com] vless-JP-1... #5'
   - ermaozi·🇯🇵[www.v2nodes.com] vless-JP-7...
-  - 'ermaozi·🏳[www.v2nodes.com] vless- #8'
   - ermaozi·🇯🇵[www.v2nodes.com] vless-JP-4...
-  - ermaozi·🇰🇷[www.v2nodes.com] vless-KR-1...
-  - 'ermaozi·🏳[www.v2nodes.com] vless- #9'
   - ermaozi·🇱🇰[www.v2nodes.com] vless-LK-6...
-  - ermaozi·🇲🇩[www.v2nodes.com] vless-MD-1...
   - ermaozi·🇲🇩[www.v2nodes.com] vless-MD-4...
   - 'ermaozi·🇲🇽[www.v2nodes.com] vless-MX-1... #1'
-  - ermaozi·🇲🇾[www.v2nodes.com] vless-MY-1...
   - 'ermaozi·🇳🇱[www.v2nodes.com] vless-NL-1... #6'
-  - 'ermaozi·🇳🇱[www.v2nodes.com] vless-NL-1... #2'
   - 'ermaozi·🇳🇱[www.v2nodes.com] vless-NL-1... #3'
   - 'ermaozi·🇳🇱[www.v2nodes.com] vless-NL-1... #9'
   - 'ermaozi·🇳🇱[www.v2nodes.com] vless-NL-1... #12'
-  - ermaozi·🇵🇱[www.v2nodes.com] vless-PL-1...
-  - 'ermaozi·🇵🇱[www.v2nodes.com] vless-PL-1... #4'
   - 'ermaozi·🇷🇴[www.v2nodes.com] vless-RO-1... #1'
   - 'ermaozi·🇵🇱[www.v2nodes.com] vless-PL-1... #8'
   - 'ermaozi·🇵🇱[www.v2nodes.com] vless-PL-1... #9'
-  - 'ermaozi·🇷🇺[www.v2nodes.com] vless-RU-1... #3'
-  - 'ermaozi·🇷🇺[www.v2nodes.com] vless-RU-1... #4'
   - 'ermaozi·🇸🇪[www.v2nodes.com] vless-SE-1... #1'
-  - ermaozi·🇸🇬[www.v2nodes.com] vless-SG-1...
-  - 'ermaozi·🇸🇬[www.v2nodes.com] vless-SG-1... #1'
-  - 'ermaozi·🇸🇬[www.v2nodes.com] vless-SG-1... #2'
-  - 'ermaozi·🏳[www.v2nodes.com] vless- #14'
-  - 'ermaozi·🇸🇬[www.v2nodes.com] vless-SG-1... #12'
-  - ermaozi·🇸🇬[www.v2nodes.com] vless-SG-9...
-  - 'ermaozi·🇸🇬[www.v2nodes.com] vless-SG-9... #1'
-  - 'ermaozi·🇸🇬[www.v2nodes.com] vless-SG-9... #2'
-  - ermaozi·🇸🇬[www.v2nodes.com] vless-SG-8...
-  - 'ermaozi·🏳[www.v2nodes.com] vless- #16'
-  - 'ermaozi·🏳[www.v2nodes.com] vless- #17'
   - 'ermaozi·🇹🇷[www.v2nodes.com] vless-TR-1... #1'
-  - 'ermaozi·🇹🇼[www.v2nodes.com] vless-TW-1... #1'
   - ermaozi·🇺🇸[www.v2nodes.com] vless-US-1...
   - 'ermaozi·🇺🇸 美国 | USA #9'
   - 'ermaozi·🇺🇸[www.v2nodes.com] vless-US-1... #2'
-  - 'ermaozi·🏳[www.v2nodes.com] vless- #19'
   - 'ermaozi·🇺🇸[www.v2nodes.com] vless-US-1... #6'
   - 'ermaozi·🇺🇸[www.v2nodes.com] vless-US-1... #7'
   - 'ermaozi·🇺🇸[www.v2nodes.com] vless-US-1... #8'
-  - ermaozi·🇻🇳[www.v2nodes.com] vless-VN-1...
-  - 'ermaozi·🇻🇳[www.v2nodes.com] vless-VN-1... #1'
-  - ermaozi·🏳[www.v2nodes.com] ss-
-  - ermaozi·🇦🇱[www.v2nodes.com] ss-AL-1490...
   - ermaozi·🇦🇹[www.v2nodes.com] ss-AT-1595...
   - ermaozi·🇨🇦[www.v2nodes.com] ss-CA-1559...
   - 'ermaozi·🇨🇦[www.v2nodes.com] ss-CA-1559... #1'
@@ -6654,14 +5168,12 @@ proxy-groups:
   - ermaozi·🇬🇧[www.v2nodes.com] ss-GB-1602...
   - ermaozi·🇬🇧[www.v2nodes.com] ss-GB-1451...
   - ermaozi·🇬🇧[www.v2nodes.com] ss-GB-1247...
-  - ermaozi·🇮🇳[www.v2nodes.com] ss-IN-1561...
   - ermaozi·🇮🇹[www.v2nodes.com] ss-IT-1602...
   - 'ermaozi·🇮🇹[www.v2nodes.com] ss-IT-1602... #8'
   - ermaozi·🇮🇹[www.v2nodes.com] ss-IT-1597...
   - ermaozi·🇮🇹[www.v2nodes.com] ss-IT-1549...
   - ermaozi·🇯🇵[www.v2nodes.com] ss-JP-1544...
   - ermaozi·🇯🇵[www.v2nodes.com] ss-JP-5141...
-  - ermaozi·🇰🇷[www.v2nodes.com] ss-KR-1185...
   - ermaozi·🇳🇱[www.v2nodes.com] ss-NL-1604...
   - ermaozi·🇳🇴[www.v2nodes.com] ss-NO-1220...
   - ermaozi·🇵🇱[www.v2nodes.com] ss-PL-1608...
@@ -6670,15 +5182,8 @@ proxy-groups:
   - ermaozi·🇵🇱[www.v2nodes.com] ss-PL-1273...
   - ermaozi·🇷🇴[www.v2nodes.com] ss-RO-1595...
   - ermaozi·🇷🇴[www.v2nodes.com] ss-RO-1298...
-  - ermaozi·🇷🇺[www.v2nodes.com] ss-RU-1609...
   - ermaozi·🇸🇪[www.v2nodes.com] ss-SE-1608...
   - ermaozi·🇸🇪[www.v2nodes.com] ss-SE-1560...
-  - ermaozi·🇿🇦[www.v2nodes.com] ss-ZA-1534...
-  - 'ermaozi·🏳[www.v2nodes.com] ss- #5'
-  - ermaozi·🇿🇦[www.v2nodes.com] ss-ZA-1333...
-  - ermaozi·🇦🇺[www.v2nodes.com] trojan-AU-...
-  - ermaozi·🇧🇷[www.v2nodes.com] trojan-BR-...
-  - ermaozi·🇨🇱[www.v2nodes.com] trojan-CL-...
   - ermaozi·🏳[www.v2nodes.com] trojan-
   - 'ermaozi·🇪🇸[www.v2nodes.com] trojan-ES-... #4'
   - 'ermaozi·🇪🇸[www.v2nodes.com] trojan-ES-... #2'
@@ -6691,16 +5196,11 @@ proxy-groups:
   - 'ermaozi·🇫🇷[www.v2nodes.com] trojan-FR-... #4'
   - 'ermaozi·🇫🇷[www.v2nodes.com] trojan-FR-... #5'
   - ermaozi·🇬🇧[www.v2nodes.com] trojan-GB-...
-  - ermaozi·🇮🇱[www.v2nodes.com] trojan-IL-...
-  - ermaozi·🇮🇳[www.v2nodes.com] trojan-IN-...
   - ermaozi·🇯🇵[www.v2nodes.com] trojan-JP-...
-  - ermaozi·🇲🇾[www.v2nodes.com] trojan-MY-...
   - ermaozi·🇳🇱[www.v2nodes.com] trojan-NL-...
   - 'ermaozi·🇳🇱[www.v2nodes.com] trojan-NL-... #1'
   - 'ermaozi·🇳🇱[www.v2nodes.com] trojan-NL-... #2'
   - 'ermaozi·🇳🇱[www.v2nodes.com] trojan-NL-... #3'
-  - 'ermaozi·🇳🇱[www.v2nodes.com] trojan-NL-... #4'
-  - 'ermaozi·🏳[www.v2nodes.com] trojan- #1'
   - 'ermaozi·🇺🇸[www.v2nodes.com] trojan-US-... #4'
   - 'ermaozi·🇺🇸[www.v2nodes.com] trojan-US-... #6'
   - 'ermaozi·🇺🇸[www.v2nodes.com] trojan-US-... #5'
@@ -6708,33 +5208,17 @@ proxy-groups:
   - 'ermaozi·🇺🇸[www.v2nodes.com] trojan-US-... #9'
   - 'ermaozi·🇺🇸[www.v2nodes.com] trojan-US-... #10'
   - 'ermaozi·tg频道:@ripaojiedian #1'
-  - ermaozi·🇭🇰 香港|@ripaojiedian
-  - ermaozi·🇭🇰 香港3|@ripaojiedian
-  - ermaozi·🇭🇰 香港2|@ripaojiedian
-  - ermaozi·🇭🇰 香港4|@ripaojiedian
-  - ermaozi·🇭🇰 香港5|@ripaojiedian
   - ermaozi·🇯🇵 日本|@ripaojiedian
   - ermaozi·🇯🇵 日本2|@ripaojiedian
   - ermaozi·🇯🇵 日本3|@ripaojiedian
-  - ermaozi·🇸🇬 新加坡|@ripaojiedian
-  - ermaozi·🇸🇬 新加坡2|@ripaojiedian
-  - ermaozi·🇰🇷 韩国|@ripaojiedian
   - ermaozi·🇺🇸 美国|@ripaojiedian
   - ermaozi·🇺🇸 美国2|@ripaojiedian
-  - ermaozi·香港2|@ripaojiedian
-  - ermaozi·香港3|@ripaojiedian
-  - ermaozi·香港4|@ripaojiedian
-  - ermaozi·香港5|@ripaojiedian
   - ermaozi·日本2|@ripaojiedian
-  - ermaozi·新加坡|@ripaojiedian
   - ermaozi·美国|@ripaojiedian
   - ermaozi·美国2|@ripaojiedian
-  - ermaozi·台湾|@ripaojiedian
-  - ermaozi·韩国|@ripaojiedian
   - ermaozi·🇸🇪SE_1|1.5MB/s
   - ermaozi·🇨🇭CH_1|1.7MB/s
   - ermaozi·🇭🇷HR_1|2.4MB/s
-  - ermaozi·🇸🇬SG_1|1.8MB/s
   - ermaozi·🇮🇹IT_1|1.1MB/s
   - ermaozi·🇸🇪SE_2|1.7MB/s
   - ermaozi·🇵🇹PT_1|2.2MB/s
@@ -6743,11 +5227,7 @@ proxy-groups:
   - 'ermaozi·🇩🇪 德国 | DEU #2'
   - 'ermaozi·🇩🇪 德国 | DEU #3'
   - 'ermaozi·🇩🇪 德国 | DEU #6'
-  - 'ermaozi·🇭🇰 香港 | HKG #2'
-  - 'ermaozi·🇭🇰 香港 | HKG #4'
   - 'ermaozi·🇮🇹 意大利 | ITA #1'
-  - 'ermaozi·🇰🇷 韩国 | KOR #1'
-  - ermaozi·🇰🇿 哈萨克斯坦 | KAZ
   - ermaozi·🇳🇱 荷兰 | NLD 3
   - ermaozi·🇳🇱 荷兰 | NLD 10
   - ermaozi·🇳🇱 荷兰 | NLD 11
@@ -6757,12 +5237,10 @@ proxy-groups:
   - ermaozi·🇳🇱 荷兰 | NLD 24
   - ermaozi·🇳🇱 荷兰 | NLD 25
   - ermaozi·🇳🇱 荷兰 | NLD 28
-  - 'ermaozi·🇸🇬 新加坡 | SGP #1'
   - 'ermaozi·🇺🇸 美国 | USA #1'
   - 'ermaozi·🇺🇸 美国 | USA #6'
   - ermaozi·AT_speednode_0001
   - ermaozi·AT_speednode_0002
-  - ermaozi·BR_speednode_0003
   - ermaozi·DE_speednode_0004
   - ermaozi·DK_speednode_0005
   - ermaozi·DK_speednode_0006
@@ -6791,28 +5269,43 @@ proxy-groups:
   - ermaozi·🇩🇪 德国 | DEU 5
   - ermaozi·🇫🇷 法国 | FRA
   - ermaozi·🇳🇱 荷兰 | NLD 2
-  - ermaozi·🇷🇺 俄罗斯 | RUS
+  - nmw·🇫🇮[www.v2nodes.com] ss-FI-1606...
+  - nmw·🇫🇷[www.v2nodes.com] ss-FR-1609...
+  - nmw·🇵🇱[www.v2nodes.com] ss-PL-1273...
+  - nmw·🇨🇦[www.v2nodes.com] trojan-CA-...
+  - 'nmw·🏳[www.v2nodes.com] trojan- #1'
+  - nmw·🇺🇸[www.v2nodes.com] trojan-US-...
+  - 'nmw·🇺🇸[www.v2nodes.com] trojan-US-... #1'
+  - 'nmw·🇺🇸[www.v2nodes.com] trojan-US-... #7'
+  - nmw·🇧🇪 比利时 | BEL
+  - nmw·🇪🇸 西班牙 | ESP
+  - nmw·🇳🇱 荷兰 | NLD
+  - nmw·🇳🇱 荷兰 | NLD 3
+  - nmw·🇳🇱 荷兰 | NLD 4
+  - nmw·🇳🇱 荷兰 | NLD 5
+  - nmw·🇳🇱 荷兰 | NLD 6
+  - nmw·🇳🇱 荷兰 | NLD 7
+  - nmw·🇳🇱 荷兰 | NLD 9
+  - nmw·🇳🇱 荷兰 | NLD 11
+  - nmw·🇳🇱 荷兰 | NLD 12
+  - nmw·🇳🇱 荷兰 | NLD 13
+  - nmw·🇳🇱 荷兰 | NLD 14
+  - nmw·🇳🇱 荷兰 | NLD 15
+  - nmw·🇳🇱 荷兰 | NLD 19
+  - nmw·🇳🇱 荷兰 | NLD 20
+  - nmw·🇳🇱 荷兰 | NLD 21
+  - nmw·🇳🇱 荷兰 | NLD 23
+  - nmw·🇳🇱 荷兰 | NLD 24
+  - nmw·🇳🇱 荷兰 | NLD 27
+  - nmw·🇳🇱 荷兰 | NLD 28
+  - nmw·🇳🇱 荷兰 | NLD 31
+  - nmw·🇳🇱 荷兰 | NLD 32
+  - nmw·🇳🇱 荷兰 | NLD 33
+  - nmw·🇳🇱 荷兰 | NLD 36
+  - nmw·🇺🇸 美国 | USA 5
   - pass·JP_speednode_0018
   - pass·JP_speednode_0019
-  - pass·RU_speednode_0029
-  - pass·RU_speednode_0030
-  - pass·RU_speednode_0031
-  - pass·RU_speednode_0032
-  - pass·RU_speednode_0033
   - pass·RU_speednode_0034
-  - pass·RU_speednode_0035
-  - pass·RU_speednode_0036
-  - pass·RU_speednode_0037
-  - pass·TR_speednode_0038
-  use: &id002
-  - wz
-  - free18
-  - free18-jsd
-  - ermaozi
-  - ermaozi-jsd
-  - nomorewalls
-  - passcro
-  - pawdroid
   url: https://www.gstatic.com/generate_204
   interval: 300
   tolerance: 100
@@ -6820,7 +5313,6 @@ proxy-groups:
 - name: 🔀 故障转移
   type: fallback
   proxies: *id001
-  use: *id002
   url: https://www.gstatic.com/generate_204
   interval: 300
   lazy: false
