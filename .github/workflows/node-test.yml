@@ -1,0 +1,41 @@
+name: node-test
+
+on:
+  push:
+    paths:
+      - "node-test/trigger.txt"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install pyyaml
+        run: python3 -m pip install --user pyyaml
+
+      - name: Download mihomo
+        run: |
+          curl -fsSL -o mihomo.gz https://github.com/MetaCubeX/mihomo/releases/download/v1.19.33/mihomo-linux-amd64-v1.19.33.gz
+          gzip -d mihomo.gz
+          chmod +x mihomo
+          ./mihomo -v
+
+      - name: Run delay tests
+        run: python3 node-test/test_all.py
+
+      - name: Publish results to test-results branch
+        if: always()
+        run: |
+          ls -la results/ || mkdir -p results
+          git config user.name "node-test"
+          git config user.email "actions@users.noreply.github.com"
+          git checkout -B test-results
+          git add -f results/
+          git commit -m "node test results $(date -u +%Y-%m-%dT%H:%M:%SZ)" || echo "nothing to commit"
+          git push -f origin test-results
