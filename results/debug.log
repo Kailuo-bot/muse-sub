@@ -1,0 +1,6 @@
+[06:12:30] loaded 728 proxies from muse.yaml (limit=0)
+[06:12:31] mihomo up: {'meta': True, 'version': 'v1.19.33'}
+[06:13:22] delay sweep done in 50.9s: alive 44/730
+[06:13:54] retry done in 31.8s: failed was 686, alive now 45
+[06:13:54] controls: {'CTRL-DEAD-UNROUTABLE': None, 'CTRL-DEAD-LOCAL': None} -> test valid: True
+[06:13:54] summary: {'tested_at_utc': '2026-11-14T06:13:54Z', 'total_tested': 728, 'alive': 45, 'dead': 683, 'controls': {'CTRL-DEAD-UNROUTABLE': None, 'CTRL-DEAD-LOCAL': None}, 'valid': True, 'test_url': 'http://www.gstatic.com/generate_204', 'note': 'Egress: GitHub Actions runner (real internet). Alive here means the node completed a real HTTP request through the proxy; reachability from China networks is not guaranteed by this test alone.'}

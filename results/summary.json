@@ -1,0 +1,13 @@
+{
+ "tested_at_utc": "2026-11-14T06:13:54Z",
+ "total_tested": 728,
+ "alive": 45,
+ "dead": 683,
+ "controls": {
+  "CTRL-DEAD-UNROUTABLE": null,
+  "CTRL-DEAD-LOCAL": null
+ },
+ "valid": true,
+ "test_url": "http://www.gstatic.com/generate_204",
+ "note": "Egress: GitHub Actions runner (real internet). Alive here means the node completed a real HTTP request through the proxy; reachability from China networks is not guaranteed by this test alone."
+}
