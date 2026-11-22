@@ -1,10 +1,8 @@
 # muse v4 —— Clash Meta (mihomo) 配置
 # v4 规则(2026-11-09 用户指定): 只收美国(US)的节点;
 #          地区按服务器 IP 归属判定, CDN 前置节点按节点名标注的国家判定, 无法判定地区的一律不收。
-# v5 验证(2026-11-12 起): 以下节点全部通过 GitHub Actions 端到端延迟测速
-#          (mihomo /delay 真实请求 gstatic generate_204, 含必死对照校验);
-#          本轮 703 个候选中测通 25 个, 其余 678 个已剔除。测速点在境外,
-#          不保证每个节点从国内网络直连可达, 手机端自动选择组会再筛一层。
+# v5 验证: 本轮候选配置, GitHub Actions 端到端测速进行中;
+#          验证通过后将替换为仅含测通节点的版本。
 mixed-port: 7890
 allow-lan: false
 mode: rule
@@ -23,164 +21,2075 @@ dns:
   - https://1.1.1.1/dns-query
   - https://8.8.8.8/dns-query
 proxies:
-- name: anaer·美国 263
-  type: vmess
-  network: tcp
-  server: 67.220.95.3
-  port: 18000
-  uuid: f8c8dc3d-0d37-46b0-8b34-a7232882fcfe
-  tls: false
-  alterId: 0
-  cipher: aes-128-gcm
-- name: anaer·美国 223
-  type: vmess
-  network: tcp
-  server: 84.17.41.2
-  port: 18000
-  uuid: f8c8dc3d-0d37-46b0-8b34-a7232882fcfe
-  udp: true
-  alterId: 0
-  cipher: auto
-- name: ermaozi·US_speednode_0040
-  port: 443
-  server: 38.247.141.135
-  skip-cert-verify: true
-  tls: true
-  type: http
-  udp: true
+- name: cheng·🇭🇰[www.v2nodes.com] ss-HK-1621...
+  cipher: aes-256-gcm
+  password: AMok40FfaM+Ikwre16psBpVk6JHxsQZw
+  port: 8388
+  server: 209.248.57.105
+  type: ss
 - name: cheng·🇺🇸[www.v2nodes.com] ss-US-1620...
   cipher: chacha20-ietf-poly1305
   password: ijoUwfdnkz7mX4pWdkSpmEixTZCt2TRm1JDr4BSaBAWkLxYGoXBHXadFKY5D5ZfoVTwqsx46jCmEUDnQUizJDYrM7B5anhnu
   port: 42878
   server: 23.230.52.119
   type: ss
-- name: ermaozi·🇺🇸US-🚀@VPNine1
-  obfs: salamander
-  obfs-password: 0dRexOATy4t9J1ckKOLpPy9HrNoU5FmN
-  password: HPzKAhFXV5XgEmRSTM33DRuTHeFcB5ON
-  port: 443
-  server: 89.117.172.45
-  sni: eth.todsm.com
-  tls: false
-  type: hysteria2
-- name: anaer·美国 271
-  type: vmess
-  network: tcp
-  server: 38.110.1.246
-  port: 18000
-  uuid: f8c8dc3d-0d37-46b0-8b34-a7232882fcfe
-  udp: true
-  alterId: 0
-  cipher: auto
-- name: ermaozi·🇺🇸US_1|1.2MB/s
-  port: 9443
-  server: 38.95.111.226
-  skip-cert-verify: true
-  tls: true
-  type: http
-  udp: true
-  x-toolall-mihomo: true
-- name: anaer·美国 331
-  type: vless
-  network: ws
-  server: OV-France1.09vpn.com
-  port: 80
-  uuid: 25f86cb1-2140-4085-abcb-c3a0ea7a4be0
-  skip-cert-verify: false
-  tls: false
-  udp: true
-  encryption: none
-  packet-encoding: xudp
-  ws-opts:
-    headers:
-      Host: OV-France1.09vpn.com
-    path: /vless/
-- name: anaer·美国 225
-  type: vless
-  network: ws
-  server: 38.107.236.166
-  port: 8443
-  uuid: 48572af1-d091-457b-a86e-4a457e99927f
-  servername: 3h-unitedstates3.09vpn.com
-  skip-cert-verify: true
-  tls: true
-  udp: true
-  packet-encoding: xudp
-  ws-opts:
-    headers:
-      Host: 3h-unitedstates3.09vpn.com
-    path: /vless/
-- name: ermaozi·🇺🇸 美国 | USA 2
-  server: germanyafterpool.fun
-  port: 443
-  type: hysteria2
-  password: 9a9f167d-b461-466f-be50-f0ffd598a6f8
-  auth: 9a9f167d-b461-466f-be50-f0ffd598a6f8
-  sni: germanyafterpool.fun
-  skip-cert-verify: true
-- name: ermaozi·🔹44@oneclickvpnkeys
-  password: a35c508f-4d5d-4531-842e-6e9d43c762c0
-  port: 4444
-  server: 179.254.191.251
-  sni: bl1.nexfile.net
-  tls: false
-  type: hysteria2
-- name: cheng·🇺🇸US_11|3.4MB/s
+- name: cheng·🇺🇸US_1|3.8MB/s
   alterId: 0
   cipher: auto
   http-opts:
-    headers:
-      Host:
-      - mmsc.vnet.mobi
+    method: GET
     path:
-    - /3x
+    - /QQqun-737805443
   network: http
   port: 52080
-  server: 192.204.58.87
+  server: 107.174.133.115
+  skip-cert-verify: true
+  tls: false
   type: vmess
   udp: true
-  uuid: 700dc5c3-9b7b-4ac8-8ee5-010ca3d03789
-  xudp: true
-- name: ermaozi·🇸🇪 瑞典 | SWE
-  server: 150.241.74.160
-  port: 30443
-  type: hysteria2
-  password: 917f4b0a-8b3b-404c-aa60-b47e83a33e8f
-  auth: 917f4b0a-8b3b-404c-aa60-b47e83a33e8f
-  sni: tll.nikomy.uk
-  skip-cert-verify: true
-- name: ermaozi·🇺🇸 机场推荐:dafei.de 美国 26_IPV4
-  type: vmess
-  server: www.shopify.com
-  port: 443
-  uuid: 6a89a215-22bf-4bd7-9642-b95b2e09583a
-  cipher: auto
-  alterId: 0
+  uuid: e7fb8bc6-5e0a-4e64-86cc-eb0ddd7ef4dd
+- name: 'cheng·🇺🇸 美国 | USA #5'
+  cipher: aes-256-gcm
+  password: 5mKjXAGrliIAlYwWDeFzkCEMIgQdFQLe
+  port: 18443
+  server: 48.103.218.77
+  type: ss
+  udp: true
+- name: free18·🇺🇸_美国 (162)
+  type: trojan
+  server: bestcdn2.868863.xyz
+  port: 2083
+  password: 3195f449-0fcf-4531-9bc4-6443d49c6a0b
+  udp: true
   tls: true
-  servername: guanwang.awsno.com
-  sni: guanwang.awsno.com
+  servername: 17951797154288.206352.xyz
+  sni: 17951797154288.206352.xyz
+  skip-cert-verify: false
   network: ws
   ws-opts:
-    path: /hls/cctv5phd.m3u8
+    path: /agraeabtegrrh
     headers:
-      Host: guanwang.awsno.com
-- name: ermaozi·🇺🇸 机场推荐:dafei.de 美国 89_IPV4
-  type: vmess
-  server: 188.114.99.137
-  port: 443
-  uuid: 6a89a215-22bf-4bd7-9642-b95b2e09583a
-  cipher: auto
-  alterId: 0
+      Host: 17951797153786.206352.xyz
+- name: free18·🇺🇸_美国 (163)
+  type: trojan
+  server: bestcdn2.868863.xyz
+  port: 2087
+  password: 3195f449-0fcf-4531-9bc4-6443d49c6a0b
+  udp: true
   tls: true
-  servername: guanwang.awsno.com
-  sni: guanwang.awsno.com
+  servername: 17951797159898.206353.xyz
+  sni: 17951797159898.206353.xyz
+  skip-cert-verify: false
+  network: ws
+  ws-opts:
+    path: /agrbniuh
+    headers:
+      Host: 17951797151124.206353.xyz
+- name: free18·🇺🇸_美国 (164)
+  type: trojan
+  server: bestcdn2.868863.xyz
+  port: 2096
+  password: 3195f449-0fcf-4531-9bc4-6443d49c6a0b
+  udp: true
+  tls: true
+  servername: 17951797156901.206355.xyz
+  sni: 17951797156901.206355.xyz
+  skip-cert-verify: false
+  network: ws
+  ws-opts:
+    path: /videomuaawe
+    headers:
+      Host: 17951797155158.206355.xyz
+- name: free18·🇺🇸_美国 (167)
+  type: trojan
+  server: 199.232.78.160
+  port: 443
+  password: MiTiVPN
+  udp: true
+  tls: true
+  servername: ssl.fastly.com
+  sni: ssl.fastly.com
+  skip-cert-verify: false
+  alpn:
+  - http/1.1
   client-fingerprint: chrome
   network: ws
   ws-opts:
-    path: /hls/cctv5phd.m3u8
+    path: /---@MiTiVPN---@MiTiVPN/---@MiTiVPN---@MiTiVPN/---@MiTiVPN---@MiTiVPN/NLSs---@MiTiVPN---@MiTiVPN/---@MiTiVPN---@MiTiVPN/---@MiTiVPN---@MiTiVPN
     headers:
-      Host: guanwang.awsno.com
-- name: 'cheng·🇺🇸 美国 | USA #5'
+      Host: mitivpn-ss-mitivpn---mitivpn--mitivpn.global.ssl.fastly.net
+- name: free18·🇺🇸_美国 (168)
+  type: trojan
+  server: 167.82.76.27
+  port: 443
+  password: MiTiVPN
+  udp: true
+  tls: true
+  servername: ssl.fastly.com
+  sni: ssl.fastly.com
+  skip-cert-verify: false
+  alpn:
+  - http/1.1
+  client-fingerprint: chrome
+  network: ws
+  ws-opts:
+    path: /---@MiTiVPN---@MiTiVPN/---@MiTiVPN---@MiTiVPN/---@MiTiVPN---@MiTiVPN/NLSs---@MiTiVPN---@MiTiVPN/---@MiTiVPN---@MiTiVPN/---@MiTiVPN---@MiTiVPN
+    headers:
+      Host: mitivpn---ss--s---mitivpn-3.global.ssl.fastly.net
+- name: free18·🇺🇸_美国 (169)
+  type: vmess
+  server: www.nextkyc.com
+  port: 8443
+  uuid: 60441548-b68e-43b2-8191-e3b884be4b3c
+  cipher: auto
+  alterId: 0
+  udp: true
+  tls: true
+  servername: v2ray1.dozapp.xyz
+  sni: v2ray1.dozapp.xyz
+  skip-cert-verify: false
+  network: ws
+  ws-opts:
+    path: /lMnsZUN4/
+    headers:
+      Host: v2ray1.dozapp.xyz
+- name: free18·🇺🇸_美国 (170)
+  type: vless
+  server: 162.159.152.4
+  port: 443
+  uuid: f2a73750-3087-48ff-a763-1348c15dce68
+  udp: true
+  tls: true
+  servername: rAyAn-007.mAxImA.DpDnS.OrG
+  sni: rAyAn-007.mAxImA.DpDnS.OrG
+  skip-cert-verify: false
+  network: ws
+  ws-opts:
+    path: /
+- name: free18·🇺🇸_美国 (171)
+  type: vless
+  server: 199.68.156.123
+  port: 443
+  uuid: 1d16c6e0-1bbe-435b-b661-90043fee999c
+  udp: true
+  tls: true
+  servername: notls.lukongtou.eu.org
+  sni: notls.lukongtou.eu.org
+  skip-cert-verify: false
+  network: ws
+  ws-opts:
+    path: Telegram-WangCai2
+- name: free18·🇺🇸_美国 (172)
+  type: vmess
+  server: 162.159.130.234
+  port: 2083
+  uuid: ac251237-576f-40c8-a543-554960c958b1
+  cipher: auto
+  alterId: 0
+  udp: true
+  tls: true
+  servername: or3.sfacg.uk
+  sni: or3.sfacg.uk
+  skip-cert-verify: false
+  network: ws
+  ws-opts:
+    path: /or3
+    headers:
+      Host: or3.sfacg.uk
+- name: free18·🇺🇸_美国 (173)
+  type: vmess
+  server: 162.159.135.234
+  port: 2083
+  uuid: ac251237-576f-40c8-a543-554960c958b1
+  cipher: auto
+  alterId: 0
+  udp: true
+  tls: true
+  servername: or3.sfacg.uk
+  sni: or3.sfacg.uk
+  skip-cert-verify: false
+  network: ws
+  ws-opts:
+    path: /or3
+    headers:
+      Host: or3.sfacg.uk
+- name: free18·🇺🇸_美国 (174)
+  type: vmess
+  server: cdn.sfacg.uk
+  port: 2083
+  uuid: ac251237-576f-40c8-a543-554960c958b1
+  cipher: auto
+  alterId: 0
+  udp: true
+  tls: true
+  servername: or3.sfacg.uk
+  sni: or3.sfacg.uk
+  skip-cert-verify: false
+  network: ws
+  ws-opts:
+    path: /or3
+    headers:
+      Host: or3.sfacg.uk
+- name: free18·🇺🇸_美国 (175)
+  type: vmess
+  server: 129.146.77.248
+  port: 39495
+  uuid: f836c736-87fc-4fde-aabc-00857ecdff3e
+  cipher: auto
+  alterId: 0
+  udp: true
+  tls: false
+  servername: 129.146.77.248
+  sni: 129.146.77.248
+  skip-cert-verify: false
+  network: ws
+  ws-opts:
+    path: /cctv13.m3u8
+    headers:
+      Host: 129.146.77.248
+- name: free18·🇺🇸_美国 (176)
+  type: vmess
+  server: 38.11.69.48
+  port: 30004
+  uuid: 418048af-a293-4b99-9b0c-98ca3580dd24
+  cipher: auto
+  alterId: 64
+  udp: true
+  tls: true
+  servername: www.83761815.xyz
+  sni: www.83761815.xyz
+  skip-cert-verify: false
+  network: ws
+  ws-opts:
+    path: /path/1698843555400
+    headers:
+      Host: www.83761815.xyz
+- name: free18·🇺🇸_美国 (177)
+  type: vmess
+  server: 172.66.0.1
+  port: 443
+  uuid: 0cf6d970-3f1d-4aae-a989-92a8f76ae3db
+  cipher: auto
+  alterId: 0
+  udp: true
+  tls: true
+  skip-cert-verify: false
+  network: ws
+  ws-opts:
+    path: /ws
+- name: free18·🇺🇸_美国 (178)
+  type: vless
+  server: 38.107.232.36
+  port: 80
+  uuid: 18cf8db1-9f86-43f7-baa0-382efb7f2dfa
+  udp: true
+  tls: false
+  skip-cert-verify: false
+  network: ws
+  ws-opts:
+    path: /vless/
+- name: free18·🇺🇸_美国 (179)
+  type: vless
+  server: 45.138.100.248
+  port: 14430
+  uuid: ae908ff5-f749-402c-af25-e6e9aef4d6bb
+  udp: true
+  tls: false
+  servername: 45.138.100.248
+  sni: 45.138.100.248
+  skip-cert-verify: false
+  network: ws
+  ws-opts:
+    path: /vless
+- name: free18·🇺🇸_美国 (180)
+  type: vless
+  server: 103.133.1.160
+  port: 80
+  uuid: eaf76557-2219-4799-8171-d7020adfefd0
+  udp: true
+  tls: false
+  servername: soft-shadow-1e33.xicav73335.workers.dev
+  sni: soft-shadow-1e33.xicav73335.workers.dev
+  skip-cert-verify: false
+  network: ws
+  ws-opts:
+    path: /ws
+- name: free18·🇺🇸_美国 (181)
+  type: vless
+  server: 198.202.24.142
+  port: 2083
+  uuid: a6ad7987-f17e-41fa-a752-72db9a725eb2
+  udp: true
+  tls: true
+  servername: vipfree.dr-ping.ir
+  sni: vipfree.dr-ping.ir
+  skip-cert-verify: false
+  network: ws
+  ws-opts:
+    path: /
+- name: free18·🇺🇸_美国 (182)
+  type: vless
+  server: 154.40.36.220
+  port: 443
+  uuid: 4e4f1f70-5e56-4a76-bb9d-db087f4690c4
+  udp: true
+  tls: true
+  servername: jp3.yohototo.top
+  sni: jp3.yohototo.top
+  skip-cert-verify: false
+  client-fingerprint: unsafe
+  network: ws
+  ws-opts:
+    path: /tyxyws
+- name: free18·🇵🇱_波兰 (2)
+  type: vless
+  server: 177.202.76.255
+  port: 443
+  uuid: 076b9961-51c7-407f-92b8-a8f2c6d42a7f
+  flow: xtls-rprx-vision
+  udp: true
+  tls: true
+  servername: pl-2.vpezid.net
+  sni: pl-2.vpezid.net
+  skip-cert-verify: false
+  client-fingerprint: firefox
+  reality-opts:
+    public-key: CnC08-EGzr6smaBZbQXW7y2mjH4uHcJly0ROcqtv0Gk
+    short-id: 09e501600e39ed57
+- name: free18·🇺🇸_美国 (67)
+  type: vless
+  server: 13.143.187.220
+  port: 443
+  uuid: 66c78912-4e2d-41dc-8742-aaae2590804e
+  flow: xtls-rprx-vision
+  udp: true
+  tls: true
+  servername: fi-s1.kadrhub.tech
+  sni: fi-s1.kadrhub.tech
+  skip-cert-verify: false
+  client-fingerprint: firefox
+  reality-opts:
+    public-key: eDzVz3bxkv3IoN3BUCa_aA-RicoeG7ACylYSnmS2Pgg
+- name: free18·🇺🇸_美国 (68)
+  type: trojan
+  server: sclass-c2.catcat321.com
+  port: 20051
+  password: d9064589-74af-432a-9390-5d8a9da281bf
+  udp: true
+  tls: true
+  servername: hk.catxstar.com
+  sni: hk.catxstar.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (69)
+  type: vless
+  server: 45.159.79.71
+  port: 4443
+  uuid: 20dd9433-389e-4573-ba7b-689619cf13da
+  flow: xtls-rprx-vision
+  udp: true
+  tls: true
+  servername: sentry.io
+  sni: sentry.io
+  skip-cert-verify: false
+  client-fingerprint: chrome
+  reality-opts:
+    public-key: 321Ii2xbCoyll6WJ0Qm1Sh8qcC0kxXvUaZhe3kyasD8
+    short-id: a1b2c3d4e5f6a7b8
+- name: free18·🇺🇸_美国 (70)
+  type: vless
+  server: 130.12.102.125
+  port: 443
+  uuid: 6429d27e-a7d4-4e04-ae57-e88243fbbfe3
+  udp: true
+  tls: true
+  servername: localhost
+  sni: localhost
+  skip-cert-verify: false
+  client-fingerprint: chrome
+  reality-opts:
+    public-key: F2VfBr2UmjDTErB_oruvW5aIvzH_xGfM2AW5_w-DF0I
+- name: free18·🇺🇸_美国 (71)
+  type: vless
+  server: 130.12.102.26
+  port: 443
+  uuid: 6429d27e-a7d4-4e04-ae57-e88243fbbfe3
+  udp: true
+  tls: true
+  servername: localhost
+  sni: localhost
+  skip-cert-verify: false
+  client-fingerprint: chrome
+  reality-opts:
+    public-key: F2VfBr2UmjDTErB_oruvW5aIvzH_xGfM2AW5_w-DF0I
+- name: free18·🇺🇸_美国 (74)
+  type: vless
+  server: 51.81.203.63
+  port: 443
+  uuid: cb2dbb6a-a1ea-4023-9ace-6466cee57241
+  flow: xtls-rprx-vision
+  udp: true
+  tls: true
+  servername: www.icloud.com
+  sni: www.icloud.com
+  skip-cert-verify: false
+  client-fingerprint: chrome
+  reality-opts:
+    public-key: nqwCf6oW49tEtmQ0EzxigZ0uu1pg0E30CS54G40Iti0
+    short-id: 4477382ff6d3d41c
+- name: free18·🇺🇸_美国 (76)
+  type: vmess
+  server: 165.140.217.2
+  port: 443
+  uuid: b65a2d69-5634-42a2-e4be-54e8a6176900
+  cipher: auto
+  alterId: 0
+  udp: true
+  tls: true
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (77)
+  type: vless
+  server: 2.26.178.129
+  port: 443
+  uuid: 6429d27e-a7d4-4e04-ae57-e88243fbbfe3
+  flow: xtls-rprx-vision
+  udp: true
+  tls: true
+  servername: localhost
+  sni: localhost
+  skip-cert-verify: false
+  client-fingerprint: chrome
+  reality-opts:
+    public-key: F2VfBr2UmjDTErB_oruvW5aIvzH_xGfM2AW5_w-DF0I
+- name: free18·🇺🇸_美国 (78)
+  type: vmess
+  server: 84.17.41.2
+  port: 18000
+  uuid: f8c8dc3d-0d37-46b0-8b34-a7232882fcfe
+  cipher: auto
+  alterId: 0
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (79)
+  type: trojan
+  server: 216.106.186.155
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: api.findlocaljobnetworkandbuildcommunityconnections.com
+  sni: api.findlocaljobnetworkandbuildcommunityconnections.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (80)
+  type: trojan
+  server: www.findlocaljobnetworkandbuildcommunityconnections.com
+  port: 443
+  password: 242a3d8eee5e4ed1a6bfa4141d549a25
+  udp: true
+  tls: true
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (81)
+  type: trojan
+  server: resources.findlocaljobnetworkandbuildcommunityconnections.com
+  port: 443
+  password: f0eb8c92ce8946aaba856569cff1a16b
+  udp: true
+  tls: true
+  servername: resources.findlocaljobnetworkandbuildcommunityconnections.com
+  sni: resources.findlocaljobnetworkandbuildcommunityconnections.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (82)
+  type: trojan
+  server: 66.163.112.142
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: cdn.unlockyourfuturefindyourperfectcareer.com
+  sni: cdn.unlockyourfuturefindyourperfectcareer.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (83)
+  type: vmess
+  server: 169.197.142.22
+  port: 18000
+  uuid: f8c8dc3d-0d37-46b0-8b34-a7232882fcfe
+  cipher: auto
+  alterId: 0
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (84)
+  type: trojan
+  server: 216.106.186.32
+  port: 443
+  password: dba20dcb635e430fa4d3bfc303a149d2
+  udp: true
+  tls: true
+  servername: blog.findlocaljobnetworkandbuildcommunityconnections.com
+  sni: blog.findlocaljobnetworkandbuildcommunityconnections.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (85)
+  type: trojan
+  server: 216.106.186.33
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: resources.findlocaljobnetworkandbuildcommunityconnections.com
+  sni: resources.findlocaljobnetworkandbuildcommunityconnections.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (86)
+  type: trojan
+  server: blog.findlocaljobnetworkandbuildcommunityconnections.com
+  port: 443
+  password: dba20dcb635e430fa4d3bfc303a149d2
+  udp: true
+  tls: true
+  servername: blog.findlocaljobnetworkandbuildcommunityconnections.com
+  sni: blog.findlocaljobnetworkandbuildcommunityconnections.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (87)
+  type: trojan
+  server: 216.106.186.46
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: cdn.findlocaljobnetworkandbuildcommunityconnections.com
+  sni: cdn.findlocaljobnetworkandbuildcommunityconnections.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (88)
+  type: trojan
+  server: 167.88.61.20
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: api.browseseniorrolesandenhanceyourcareertoday.com
+  sni: api.browseseniorrolesandenhanceyourcareertoday.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (89)
+  type: trojan
+  server: 66.163.112.13
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: blog.unlockyourfuturefindyourperfectcareer.com
+  sni: blog.unlockyourfuturefindyourperfectcareer.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (90)
+  type: vless
+  server: kuruish.org
+  port: 443
+  uuid: 03fcc618-b93d-6796-6aed-8a38c975d581
+  udp: true
+  tls: true
+  servername: kuruish.org
+  sni: kuruish.org
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (91)
+  type: trojan
+  server: 216.106.186.66
+  port: 443
+  password: 242a3d8eee5e4ed1a6bfa4141d549a25
+  udp: true
+  tls: true
+  servername: www.findlocaljobnetworkandbuildcommunityconnections.com
+  sni: www.findlocaljobnetworkandbuildcommunityconnections.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (92)
+  type: trojan
+  server: 167.88.61.52
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: courses.browseseniorrolesandenhanceyourcareertoday.com
+  sni: courses.browseseniorrolesandenhanceyourcareertoday.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (93)
+  type: trojan
+  server: 66.163.112.242
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (94)
+  type: trojan
+  server: 167.88.61.175
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: blog.browseseniorrolesandenhanceyourcareertoday.com
+  sni: blog.browseseniorrolesandenhanceyourcareertoday.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (95)
+  type: vless
+  server: 199.7.140.201
+  port: 443
+  uuid: a52ac672-0f5f-4070-b8fd-6b5685fc8004
+  flow: xtls-rprx-vision
+  udp: true
+  tls: true
+  servername: www.cloudflare.com
+  sni: www.cloudflare.com
+  skip-cert-verify: false
+  client-fingerprint: chrome
+  reality-opts:
+    public-key: LRAkgKlj5BPtVAGEIZfO5LvDZ5Eg91X0CBKIYhBC1jE
+- name: free18·🇺🇸_美国 (96)
+  type: vmess
+  server: 129.146.143.80
+  port: 48111
+  uuid: d4603cc2-e0ee-4651-83f5-1db5b7168177
+  cipher: auto
+  alterId: 0
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (97)
+  type: trojan
+  server: 66.163.112.76
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (98)
+  type: trojan
+  server: 66.163.112.31
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: unlockyourfuturefindyourperfectcareer.com
+  sni: unlockyourfuturefindyourperfectcareer.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (99)
+  type: trojan
+  server: 66.163.112.121
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: www.unlockyourfuturefindyourperfectcareer.com
+  sni: www.unlockyourfuturefindyourperfectcareer.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (100)
+  type: trojan
+  server: 216.106.186.82
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: courses.findlocaljobnetworkandbuildcommunityconnections.com
+  sni: courses.findlocaljobnetworkandbuildcommunityconnections.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (101)
+  type: trojan
+  server: 66.163.112.171
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: learn.unlockyourfuturefindyourperfectcareer.com
+  sni: learn.unlockyourfuturefindyourperfectcareer.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (102)
+  type: vless
+  server: edge.bookmai.com
+  port: 443
+  uuid: b9bfa54d-bc44-4592-a6d6-89a9665d286f
+  flow: xtls-rprx-vision
+  udp: true
+  tls: true
+  servername: mother-earth.fyi
+  sni: mother-earth.fyi
+  skip-cert-verify: false
+  client-fingerprint: chrome
+  reality-opts:
+    public-key: SbVKOEMjK0sIlbwg4akyBg5mL5KZwwB-ed4eEE7YnRc
+- name: free18·🇺🇸_美国 (103)
+  type: trojan
+  server: 216.152.155.176
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: blog.nextjobopportunityandclaimyouridealrole.com
+  sni: blog.nextjobopportunityandclaimyouridealrole.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (104)
+  type: trojan
+  server: 66.163.114.166
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: blog.findconnectwithemployersandbuildprofessionalnetwork.com
+  sni: blog.findconnectwithemployersandbuildprofessionalnetwork.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (105)
+  type: trojan
+  server: 216.152.155.59
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: api.nextjobopportunityandclaimyouridealrole.com
+  sni: api.nextjobopportunityandclaimyouridealrole.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (106)
+  type: trojan
+  server: 216.152.155.23
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: courses.nextjobopportunityandclaimyouridealrole.com
+  sni: courses.nextjobopportunityandclaimyouridealrole.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (107)
+  type: trojan
+  server: 66.163.114.106
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: www.findconnectwithemployersandbuildprofessionalnetwork.com
+  sni: www.findconnectwithemployersandbuildprofessionalnetwork.com
+  skip-cert-verify: false
+- name: free18·🇩🇪_德国 (50)
+  type: vless
+  server: 48.103.231.2
+  port: 443
+  uuid: a346c521-7a7f-452b-9356-a4893feb5982
+  flow: xtls-rprx-vision
+  udp: true
+  tls: true
+  servername: ee1-r.bankai.party
+  sni: ee1-r.bankai.party
+  skip-cert-verify: false
+  client-fingerprint: chrome
+  reality-opts:
+    public-key: FWitre1jinQR7qz5HQ0q2Q4Gg9xA9B0SyizCziN7Ch0
+    short-id: 457fab2ac885dbe0
+- name: free18·🇺🇸_美国 (109)
+  type: trojan
+  server: 216.152.155.50
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: cdn.nextjobopportunityandclaimyouridealrole.com
+  sni: cdn.nextjobopportunityandclaimyouridealrole.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (110)
+  type: trojan
+  server: 216.152.155.158
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: resources.nextjobopportunityandclaimyouridealrole.com
+  sni: resources.nextjobopportunityandclaimyouridealrole.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (111)
+  type: trojan
+  server: 66.163.112.147
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: courses.unlockyourfuturefindyourperfectcareer.com
+  sni: courses.unlockyourfuturefindyourperfectcareer.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (112)
+  type: trojan
+  server: 170.101.101.131
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: blog.explorecreativejobsandenhanceyourcareerportfolio.com
+  sni: blog.explorecreativejobsandenhanceyourcareerportfolio.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (113)
+  type: vmess
+  server: 67.220.85.46
+  port: 18000
+  uuid: f8c8dc3d-0d37-46b0-8b34-a7232882fcfe
+  cipher: auto
+  alterId: 0
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (114)
+  type: vless
+  server: 167.17.69.171
+  port: 443
+  uuid: 00144519-7e0d-476b-8d28-435576af9262
+  flow: xtls-rprx-vision
+  udp: true
+  tls: true
+  servername: www.cloudflare.com
+  sni: www.cloudflare.com
+  skip-cert-verify: false
+  client-fingerprint: chrome
+  reality-opts:
+    public-key: ALT8hIGeZEhi0sQFbXP_ntBg8Xo-v7i0YCLrqTnBxRk
+    short-id: 0990d22f
+- name: free18·🇺🇸_美国 (115)
+  type: trojan
+  server: 66.163.114.245
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: findconnectwithemployersandbuildprofessionalnetwork.com
+  sni: findconnectwithemployersandbuildprofessionalnetwork.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (116)
+  type: trojan
+  server: 170.101.101.211
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: api.explorecreativejobsandenhanceyourcareerportfolio.com
+  sni: api.explorecreativejobsandenhanceyourcareerportfolio.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (117)
+  type: trojan
+  server: 170.101.101.53
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: www.explorecreativejobsandenhanceyourcareerportfolio.com
+  sni: www.explorecreativejobsandenhanceyourcareerportfolio.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (118)
+  type: trojan
+  server: 170.101.101.19
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: learn.explorecreativejobsandenhanceyourcareerportfolio.com
+  sni: learn.explorecreativejobsandenhanceyourcareerportfolio.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (119)
+  type: trojan
+  server: 170.101.101.237
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: cdn.explorecreativejobsandenhanceyourcareerportfolio.com
+  sni: cdn.explorecreativejobsandenhanceyourcareerportfolio.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (120)
+  type: trojan
+  server: 69.164.240.85
+  port: 50875
+  password: nwilryafgkyvuxauc8pz
+  udp: true
+  tls: true
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (121)
+  type: trojan
+  server: 170.101.101.112
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: resources.explorecreativejobsandenhanceyourcareerportfolio.com
+  sni: resources.explorecreativejobsandenhanceyourcareerportfolio.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (122)
+  type: vmess
+  server: 38.68.135.131
+  port: 1270
+  uuid: 5c040f1d-45db-43bd-8d46-e4950e433735
+  cipher: auto
+  alterId: 0
+  udp: true
+  tls: true
+  skip-cert-verify: false
+- name: free18·🇳🇱_荷兰 (44)
+  type: vless
+  server: 201.8.64.226
+  port: 443
+  uuid: cda0862a-0f87-4be9-8ed8-1d0c9e382839
+  flow: xtls-rprx-vision
+  udp: true
+  tls: true
+  servername: f0d7aft.nl13.h1clayd.click
+  sni: f0d7aft.nl13.h1clayd.click
+  skip-cert-verify: false
+  client-fingerprint: chrome
+  reality-opts:
+    public-key: kkCGiCQCKnkozJR1KKCRNtmdBECmThCgI9VSv7iDcWI
+    short-id: 8956c57cb4c4f8d2
+- name: free18·🇺🇸_美国 (123)
+  type: trojan
+  server: 66.163.122.25
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: cdn.searchnationwidecareerchangehelperandguidancetoday.com
+  sni: cdn.searchnationwidecareerchangehelperandguidancetoday.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (124)
+  type: vmess
+  server: 67.220.95.3
+  port: 18000
+  uuid: f8c8dc3d-0d37-46b0-8b34-a7232882fcfe
+  cipher: auto
+  alterId: 0
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (125)
+  type: trojan
+  server: 66.163.122.30
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: resources.searchnationwidecareerchangehelperandguidancetoday.com
+  sni: resources.searchnationwidecareerchangehelperandguidancetoday.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (126)
+  type: trojan
+  server: 216.152.156.42
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (127)
+  type: trojan
+  server: 66.163.122.26
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: blog.searchnationwidecareerchangehelperandguidancetoday.com
+  sni: blog.searchnationwidecareerchangehelperandguidancetoday.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (128)
+  type: trojan
+  server: 216.152.156.49
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: cdn.healthcarejobshubenhancemedicalprofessionalskillstoday.com
+  sni: cdn.healthcarejobshubenhancemedicalprofessionalskillstoday.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (129)
+  type: trojan
+  server: 48.102.218.118
+  port: 8443
+  password: BU4Sr6jWcc78Eh06srysDwhzc-Than
+  udp: true
+  tls: true
+  servername: ru.federal-usa.com
+  sni: ru.federal-usa.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (130)
+  type: trojan
+  server: 170.101.101.67
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: courses.explorecreativejobsandenhanceyourcareerportfolio.com
+  sni: courses.explorecreativejobsandenhanceyourcareerportfolio.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (131)
+  type: trojan
+  server: 66.163.122.7
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: www.searchnationwidecareerchangehelperandguidancetoday.com
+  sni: www.searchnationwidecareerchangehelperandguidancetoday.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (132)
+  type: trojan
+  server: 66.163.122.46
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: searchnationwidecareerchangehelperandguidancetoday.com
+  sni: searchnationwidecareerchangehelperandguidancetoday.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (133)
+  type: trojan
+  server: 216.152.156.212
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: courses.healthcarejobshubenhancemedicalprofessionalskillstoday.com
+  sni: courses.healthcarejobshubenhancemedicalprofessionalskillstoday.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (134)
+  type: trojan
+  server: 216.152.156.65
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: learn.healthcarejobshubenhancemedicalprofessionalskillstoday.com
+  sni: learn.healthcarejobshubenhancemedicalprofessionalskillstoday.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (135)
+  type: trojan
+  server: 216.152.156.159
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: resources.healthcarejobshubenhancemedicalprofessionalskillstoday.com
+  sni: resources.healthcarejobshubenhancemedicalprofessionalskillstoday.com
+  skip-cert-verify: false
+- name: free18·🇳🇱_荷兰 (45)
+  type: vless
+  server: 195.206.235.74
+  port: 443
+  uuid: cda0862a-0f87-4be9-8ed8-1d0c9e382839
+  flow: xtls-rprx-vision
+  udp: true
+  tls: true
+  servername: f0d7aft.nl13.h1clayd.click
+  sni: f0d7aft.nl13.h1clayd.click
+  skip-cert-verify: false
+  client-fingerprint: chrome
+  reality-opts:
+    public-key: kkCGiCQCKnkozJR1KKCRNtmdBECmThCgI9VSv7iDcWI
+    short-id: 8956c57cb4c4f8d2
+- name: free18·🇺🇸_美国 (136)
+  type: vmess
+  server: 38.91.107.49
+  port: 18000
+  uuid: f8c8dc3d-0d37-46b0-8b34-a7232882fcfe
+  cipher: auto
+  alterId: 0
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (137)
+  type: vmess
+  server: 38.110.1.246
+  port: 18000
+  uuid: f8c8dc3d-0d37-46b0-8b34-a7232882fcfe
+  cipher: auto
+  alterId: 0
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (138)
+  type: trojan
+  server: 169.197.140.214
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: courses.discoverfreshgraduatejobsstartyourprofessionaljourney.com
+  sni: courses.discoverfreshgraduatejobsstartyourprofessionaljourney.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (139)
+  type: trojan
+  server: 216.152.156.81
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: www.healthcarejobshubenhancemedicalprofessionalskillstoday.com
+  sni: www.healthcarejobshubenhancemedicalprofessionalskillstoday.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (140)
+  type: trojan
+  server: 169.197.140.245
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: www.discoverfreshgraduatejobsstartyourprofessionaljourney.com
+  sni: www.discoverfreshgraduatejobsstartyourprofessionaljourney.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (141)
+  type: trojan
+  server: 169.197.140.208
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: blog.discoverfreshgraduatejobsstartyourprofessionaljourney.com
+  sni: blog.discoverfreshgraduatejobsstartyourprofessionaljourney.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (142)
+  type: trojan
+  server: 169.197.140.169
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: api.discoverfreshgraduatejobsstartyourprofessionaljourney.com
+  sni: api.discoverfreshgraduatejobsstartyourprofessionaljourney.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (143)
+  type: trojan
+  server: 169.197.140.171
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: cdn.discoverfreshgraduatejobsstartyourprofessionaljourney.com
+  sni: cdn.discoverfreshgraduatejobsstartyourprofessionaljourney.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (144)
+  type: trojan
+  server: 169.197.140.218
+  port: 443
+  password: 0ab6c98dae3b48e8b9c4a776b6c9c19a
+  udp: true
+  tls: true
+  servername: learn.discoverfreshgraduatejobsstartyourprofessionaljourney.com
+  sni: learn.discoverfreshgraduatejobsstartyourprofessionaljourney.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (145)
+  type: vmess
+  server: 38.91.107.188
+  port: 1270
+  uuid: 5c040f1d-45db-43bd-8d46-e4950e433735
+  cipher: auto
+  alterId: 0
+  udp: true
+  tls: true
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (146)
+  type: vmess
+  server: 162.251.62.44
+  port: 1270
+  uuid: 5c040f1d-45db-43bd-8d46-e4950e433735
+  cipher: auto
+  alterId: 0
+  udp: true
+  tls: true
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (148)
+  type: vless
+  server: ww13.levikogjgfdd.ir
+  port: 23576
+  uuid: 48ff2b70-e180-582f-8866-d9a2edeed5f5
+  flow: xtls-rprx-vision
+  udp: true
+  tls: true
+  servername: fuck.rkn
+  sni: fuck.rkn
+  skip-cert-verify: false
+  client-fingerprint: chrome
+  reality-opts:
+    public-key: 1y5h2FGWKXTJ9xLPCqPo6Mw7RxoZzh6fGkEQKNxpZ3s
+    short-id: '01'
+- name: free18·🇺🇸_美国 (149)
+  type: vless
+  server: 15.204.97.197
+  port: 23576
+  uuid: 48ff2b70-e180-582f-8866-d9a2edeed5f5
+  flow: xtls-rprx-vision
+  udp: true
+  tls: true
+  servername: fuck.rkn
+  sni: fuck.rkn
+  skip-cert-verify: false
+  client-fingerprint: chrome
+  reality-opts:
+    public-key: 1y5h2FGWKXTJ9xLPCqPo6Mw7RxoZzh6fGkEQKNxpZ3s
+    short-id: '01'
+- name: free18·🇺🇸_美国 (150)
+  type: vless
+  server: 15.204.97.206
+  port: 23576
+  uuid: 48ff2b70-e180-582f-8866-d9a2edeed5f5
+  flow: xtls-rprx-vision
+  udp: true
+  tls: true
+  servername: fuck.rkn
+  sni: fuck.rkn
+  skip-cert-verify: false
+  client-fingerprint: chrome
+  reality-opts:
+    public-key: 1y5h2FGWKXTJ9xLPCqPo6Mw7RxoZzh6fGkEQKNxpZ3s
+    short-id: '01'
+- name: free18·🇺🇸_美国 (151)
+  type: vless
+  server: 15.204.97.214
+  port: 23576
+  uuid: 48ff2b70-e180-582f-8866-d9a2edeed5f5
+  flow: xtls-rprx-vision
+  udp: true
+  tls: true
+  servername: fuck.rkn
+  sni: fuck.rkn
+  skip-cert-verify: false
+  client-fingerprint: chrome
+  reality-opts:
+    public-key: 1y5h2FGWKXTJ9xLPCqPo6Mw7RxoZzh6fGkEQKNxpZ3s
+    short-id: '01'
+- name: free18·🇺🇸_美国 (152)
+  type: vmess
+  server: 162.251.62.31
+  port: 1270
+  uuid: 5c040f1d-45db-43bd-8d46-e4950e433735
+  cipher: auto
+  alterId: 0
+  udp: true
+  tls: true
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (155)
+  type: vmess
+  server: 192.204.58.87
+  port: 52080
+  uuid: 700dc5c3-9b7b-4ac8-8ee5-010ca3d03789
+  cipher: auto
+  alterId: 0
+  udp: true
+  tls: false
+  servername: mmsc.vnet.mobi
+  sni: mmsc.vnet.mobi
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (156)
+  type: vless
+  server: 23.144.132.46
+  port: 443
+  uuid: a1bd17a7-cd13-46e5-a0cc-2f1f5109f664
+  udp: true
+  tls: true
+  servername: gateway.icloud.com
+  sni: gateway.icloud.com
+  skip-cert-verify: false
+  client-fingerprint: chrome
+  reality-opts:
+    public-key: yKDS7iNuq77KTCJwrOuxon5zCQtf_aKiWOGfHZLjARo
+    short-id: 6ca9a839cffd7543
+- name: free18·🇺🇸_美国 (157)
+  type: vmess
+  server: 192.204.58.87
+  port: 2053
+  uuid: 286a45bc-f3aa-4a2d-8e6e-21fb824d9eeb
+  cipher: auto
+  alterId: 0
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (158)
+  type: vmess
+  server: 107.172.18.132
+  port: 52080
+  uuid: 2ceddc69-0f1a-44b2-b7b3-fd6674c3fc59
+  cipher: auto
+  alterId: 0
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (159)
+  type: vmess
+  server: 172.245.106.236
+  port: 52080
+  uuid: 069b590d-895b-4707-bf71-7c204c3f6e77
+  cipher: auto
+  alterId: 0
+  udp: true
+  tls: false
+  servername: down-cdn.dingtalk.com
+  sni: down-cdn.dingtalk.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (160)
+  type: vmess
+  server: 172.245.106.236
+  port: 23567
+  uuid: 94b804fa-f7f0-4105-9544-ec667c876bee
+  cipher: auto
+  alterId: 0
+  udp: true
+  tls: false
+  servername: down-cdn.dingtalk.com
+  sni: down-cdn.dingtalk.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (161)
+  type: vmess
+  server: 198.2.224.117
+  port: 52080
+  uuid: 9be3c602-c743-4a19-98c2-c74d85ffc4c1
+  cipher: auto
+  alterId: 0
+  udp: true
+  tls: false
+  servername: down-cdn.dingtalk.com
+  sni: down-cdn.dingtalk.com
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (65)
+  type: vless
+  server: ledger.filnex.baby
+  port: 443
+  uuid: 25ac78e7-6d1d-4c9a-a450-c01a4871769f
+  udp: true
+  tls: true
+  servername: copperdell.merlano.monster
+  sni: copperdell.merlano.monster
+  skip-cert-verify: false
+  alpn:
+  - h2
+  client-fingerprint: chrome
+  network: grpc
+  grpc-opts:
+    grpc-service-name: glush.de2.v1
+- name: free18·🇺🇸_美国 (66)
+  type: vless
+  server: 162.35.101.177
+  port: 443
+  uuid: cda0862a-0f87-4be9-8ed8-1d0c9e382839
+  udp: true
+  tls: true
+  servername: 0592efg.us8.h1clayd.click
+  sni: 0592efg.us8.h1clayd.click
+  skip-cert-verify: false
+  client-fingerprint: edge
+  reality-opts:
+    public-key: cO3wYHISTeorXcM8ffaDCDdqZ-olBQL-GyZqb-W7rTk
+    short-id: bd8f712209a9c283
+  network: grpc
+  grpc-opts:
+    grpc-service-name: 99f2107b03f8
+- name: free18·🇺🇸_美国
+  type: ss
+  server: 38.143.66.146
+  port: 19999
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (2)
+  type: ss
+  server: 169.197.142.68
+  port: 19999
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (3)
+  type: ss
+  server: 173.244.56.6
+  port: 443
+  password: shadowsocks
+  cipher: aes-128-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (4)
+  type: ss
+  server: 173.244.56.9
+  port: 443
+  password: shadowsocks
+  cipher: aes-128-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (5)
+  type: ss
+  server: 95.215.201.18
+  port: 19999
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (6)
+  type: ss
+  server: 23.150.152.38
+  port: 19999
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (7)
+  type: ss
+  server: 167.88.62.203
+  port: 19999
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (8)
+  type: ss
+  server: 156.146.38.170
+  port: 443
+  password: shadowsocks
+  cipher: aes-128-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (9)
+  type: ss
+  server: 136.148.77.250
+  port: 8388
+  password: itzvpn@321
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (10)
+  type: ss
+  server: 198.98.53.130
+  port: 443
+  password: eDfN7SODQceIOmIAbtJJtK
+  cipher: chacha20-ietf-poly1305
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (11)
+  type: ss
+  server: 216.106.178.169
+  port: 19999
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (12)
+  type: ss
+  server: 38.128.66.32
+  port: 19999
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (13)
+  type: ss
+  server: 167.88.62.56
+  port: 19999
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (14)
+  type: ss
+  server: 67.220.73.178
+  port: 19999
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (15)
+  type: ss
+  server: 37.19.198.160
+  port: 443
+  password: shadowsocks
+  cipher: aes-128-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (16)
+  type: ss
+  server: 37.19.198.243
+  port: 443
+  password: shadowsocks
+  cipher: aes-128-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (17)
+  type: ss
+  server: 200.102.179.179
+  port: 8388
+  password: itzvpn@321
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (18)
+  type: ss
+  server: 67.220.73.247
+  port: 443
+  password: DGjtV63aPW3E
+  cipher: chacha20-ietf-poly1305
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (19)
+  type: ss
+  server: 37.19.198.236
+  port: 443
+  password: shadowsocks
+  cipher: aes-128-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (20)
+  type: ss
+  server: 149.40.57.138
+  port: 19999
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (21)
+  type: ss
+  server: 37.19.198.244
+  port: 443
+  password: shadowsocks
+  cipher: aes-128-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (22)
+  type: ss
+  server: 138.197.89.234
+  port: 28960
+  password: DZRy4Q3QH0jUGfKFl2jDCZ
+  cipher: chacha20-ietf-poly1305
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (23)
+  type: ss
+  server: 149.40.57.134
+  port: 19999
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (24)
+  type: ss
+  server: 185.215.132.18
+  port: 19999
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (25)
+  type: ss
+  server: 149.40.57.133
+  port: 19999
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (26)
+  type: ss
+  server: 84.20.27.183
+  port: 19999
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (27)
+  type: ss
+  server: 38.22.17.129
+  port: 19999
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (28)
+  type: ss
+  server: 156.146.38.169
+  port: 443
+  password: shadowsocks
+  cipher: aes-128-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (29)
+  type: ss
+  server: 156.146.38.168
+  port: 443
+  password: shadowsocks
+  cipher: aes-128-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (30)
+  type: ss
+  server: 185.230.230.18
+  port: 19999
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (31)
+  type: ss
+  server: 45.86.51.18
+  port: 19999
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (32)
+  type: ss
+  server: 167.88.63.99
+  port: 19999
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (33)
+  type: ss
+  server: 38.121.43.231
+  port: 19999
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (34)
+  type: ss
+  server: 185.215.132.9
+  port: 19999
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (35)
+  type: ss
+  server: 172.111.38.72
+  port: 19999
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (36)
+  type: ss
+  server: 38.22.17.139
+  port: 19999
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (37)
+  type: ss
+  server: 38.121.43.18
+  port: 19999
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (38)
+  type: ss
+  server: 193.151.160.9
+  port: 19999
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (39)
+  type: ss
+  server: 38.121.43.225
+  port: 19999
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (40)
+  type: ss
+  server: 38.22.17.214
+  port: 19999
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (41)
+  type: ss
+  server: 193.151.160.18
+  port: 19999
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (42)
+  type: ss
+  server: 162.251.62.31
+  port: 19999
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (43)
+  type: ss
+  server: 135.148.42.13
+  port: 8388
+  password: itzvpn@321
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (44)
+  type: ss
+  server: 15.204.247.244
+  port: 4444
+  password: pKEW8JPByTVTLtM
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (45)
+  type: ss
+  server: 38.91.107.19
+  port: 19999
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (46)
+  type: ss
+  server: 66.163.125.120
+  port: 19999
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (47)
+  type: ss
+  server: 15.204.247.124
+  port: 2375
+  password: faBAoD54k87UJG7
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (48)
+  type: ss
+  server: 38.91.107.57
+  port: 19999
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (49)
+  type: ss
+  server: 169.197.140.247
+  port: 19999
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (50)
+  type: ss
+  server: 15.204.247.206
+  port: 4444
+  password: pKEW8JPByTVTLtM
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (51)
+  type: ss
+  server: 40.160.86.43
+  port: 8388
+  password: itzvpn@321
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (52)
+  type: ss
+  server: 38.91.107.188
+  port: 19999
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (53)
+  type: ss
+  server: 15.204.247.244
+  port: 443
+  password: pKEW8JPByTVTLtM
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (54)
+  type: ss
+  server: 15.204.246.107
+  port: 8888
+  password: Y6R9pAtvxxzmGC
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (55)
+  type: ss
+  server: 137.184.89.151
+  port: 19999
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (56)
+  type: ss
+  server: 38.91.100.39
+  port: 19999
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (57)
+  type: ss
+  server: 193.151.163.18
+  port: 19999
+  password: ZRpgaBeGxtENIXgvhpkZBKz9GnWRS2dYcx9O+a2iwN4=
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (58)
+  type: ss
+  server: 15.204.247.175
+  port: 8008
+  password: XKFKl2rULjIp74
+  cipher: aes-256-gcm
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (59)
+  type: ss
+  server: 132.226.77.186
+  port: 50356
+  password: YG3nrWleyOJy8hUVHF1Nc8vOY0JgKdiT4n627Bj32+8=
+  cipher: 2022-blake3-chacha20-poly1305
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (60)
+  type: ss
+  server: 161.153.38.61
+  port: 50356
+  password: EP/0kIjk18c43tfkqeJqdVQm8lGArteYkhhwgBJ3q70=
+  cipher: 2022-blake3-chacha20-poly1305
+  udp: true
+  tls: false
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (62)
+  type: hysteria2
+  server: 172.87.24.53
+  port: 8443
+  password: fce629d692a7b1ad71a17dae29d8b3c6
+  udp: true
+  servername: hy2k2p.local
+  sni: hy2k2p.local
+  skip-cert-verify: false
+- name: free18·🇺🇸_美国 (64)
+  type: hysteria2
+  server: 104.233.178.178
+  port: 443
+  password: fanvpn.net
+  udp: true
+  servername: www.bing.com
+  sni: www.bing.com
+  skip-cert-verify: false
+- name: ermaozi·🇺🇸_US_美国_IPV4
+  type: hysteria
+  server: 137.175.82.41
+  port: 20022
+  password: dongtaiwang.com
+  tls: true
+  servername: bing.com
+  sni: bing.com
+  skip-cert-verify: true
+  alpn:
+  - h3
+  up: '11'
+  down: '55'
+  auth-str: dongtaiwang.com
+- name: ermaozi·🇺🇸_US_美国_IPV4 (2)
+  type: hysteria
+  server: 38.6.222.132
+  port: 11008
+  password: dongtaiwang.com
+  tls: true
+  servername: bing.com
+  sni: bing.com
+  skip-cert-verify: true
+  alpn:
+  - h3
+  up: '11'
+  down: '55'
+  auth-str: dongtaiwang.com
+- name: ermaozi·🇺🇸_US_美国_IPV4 (3)
+  type: hysteria
+  server: 38.6.222.131
+  port: 11008
+  password: dongtaiwang.com
+  tls: true
+  servername: bing.com
+  sni: bing.com
+  skip-cert-verify: true
+  alpn:
+  - h3
+  up: '11'
+  down: '55'
+  auth-str: dongtaiwang.com
+- name: ermaozi·🇺🇸139909 | ⚡️Telegram = t.me/S...
+  password: qQe1z5kU8kN6SlKnDt9Ru3Qp
+  port: 443
+  server: 54.213.89.22
+  skip-cert-verify: true
+  sni: vk.com
+  tls: false
+  type: hysteria2
+- name: ermaozi·🔵93@oneclickvpnkeys
+  obfs: salamander
+  obfs-password: c8827ab99e316c5bd414e21afa915ddf
+  password: 8294f130408299df8cab08c80bf6f819
+  port: 443
+  server: 24.233.8.109
+  skip-cert-verify: true
+  sni: www.bing.com
+  tls: false
+  type: hysteria2
+- name: 'ermaozi·@OutlineReleasedKey #5'
+  password: a35c508f-4d5d-4531-842e-6e9d43c762c0
+  port: 4444
+  server: 179.254.191.251
+  skip-cert-verify: false
+  sni: bl1.nexfile.net
+  tls: false
+  type: hysteria2
+- name: ermaozi·🇭🇰[www.v2nodes.com] vless-HK-4...
+  network: ws
+  port: 443
+  server: 149.104.5.141
+  servername: byyzz.pages.dev
+  tls: true
+  type: vless
+  uuid: 0c492b73-98de-4ad2-bbe9-eb25661d17ac
+  ws-opts:
+    headers:
+      Host: byyzz.pages.dev
+    path: /?proxyip=proxyip.oracle.cmliussss.netfp=chrome
+- name: ermaozi·🇮🇪[www.v2nodes.com] vless-IE-3...
+  network: ws
+  port: 443
+  server: 23.94.67.209
+  servername: cj1-e06.pages.dev
+  tls: true
+  type: vless
+  uuid: 9be9e1e4-d1fc-4423-b22d-cd07a4381acb
+  ws-opts:
+    headers:
+      Host: cj1-e06.pages.dev
+    path: /fp=random
+- name: 'ermaozi·🇳🇱 荷兰 | NLD #2'
+  client-fingerprint: firefox
+  network: ws
+  port: 444
+  server: 48.102.173.24
+  servername: neplay603.gangtype.com
+  tls: true
+  type: vless
+  udp: true
+  uuid: ef5a57c7-84d5-4f86-b99c-875a16da485f
+  ws-opts:
+    headers:
+      Host: neplay603.gangtype.com
+    path: /stream/updates/a66d7902
+- name: ermaozi·🇹🇷[www.v2nodes.com] vless-TR-1...
+  alpn:
+  - h2
+  client-fingerprint: chrome
+  grpc-opts:
+    grpc-service-name: vlgrpc
+  network: grpc
+  port: 8443
+  server: 13.143.197.74
+  servername: kk-tr-74.testkknegr.online
+  tls: true
+  type: vless
+  uuid: 12910384-1ef8-40a3-818a-57277063ea66
+- name: ermaozi·美国5|@ripaojiedian
+  network: tcp
+  password: Mitivpn
+  port: 443
+  server: 151.101.110.219
+  skip-cert-verify: true
+  sni: ssl.fastly.com
+  type: trojan
+  udp: true
+- name: 'ermaozi·🇺🇸 美国 | USA #2'
+  alpn:
+  - http/1.1
+  client-fingerprint: chrome
+  network: ws
+  port: 443
+  server: 172.67.197.170
+  servername: o685y.save-node.com
+  tls: true
+  type: vless
+  udp: true
+  uuid: 88e79aa6-f431-4453-8dcc-652a0c747198
+  ws-opts:
+    headers:
+      Host: o685y.save-node.com
+    path: /api/se1k2rfxlsuer3ry4u6e84kl8rqp721p
+- name: 'ermaozi·🇺🇸 美国 | USA #6'
+  client-fingerprint: chrome
+  network: ws
+  port: 443
+  server: sparkling-gadabout.quick-cdn.net
+  servername: sparkling-gadabout.quick-cdn.net
+  tls: true
+  type: vless
+  udp: true
+  uuid: ff3117a2-f6d6-45a5-b82a-9df9b24a1426
+  ws-opts:
+    headers:
+      Host: sparkling-gadabout.quick-cdn.net
+    path: /ws
+- name: 'ermaozi·🇺🇸 美国 | USA #10'
   alterId: 64
   cipher: auto
   network: ws
@@ -195,106 +2104,200 @@ proxies:
     headers:
       Host: www.91334565.xyz
     path: /path/1733477783705
-- name: ermaozi·🇺🇸_US_美国_IPV4 (12)
-  type: vmess
-  server: 104.18.42.163
-  port: 443
-  uuid: 6a89a215-22bf-4bd7-9642-b95b2e09583a
-  cipher: auto
+- name: 'ermaozi·🇺🇸 美国 | USA #11'
+  alpn:
+  - ''
   alterId: 0
+  cipher: auto
+  network: ws
+  port: 16648
+  server: afzuv.xiaoyan.io
+  skip-cert-verify: true
+  tls: false
+  type: vmess
+  udp: true
+  uuid: 904f0569-8695-466f-97cf-0de2face1b46
+  ws-opts:
+    headers:
+      Host: f9309cc88637c26f552a1a64fb311cae.mobgslb.tbcache.com
+    path: /
+- name: 'ermaozi·🇺🇸 美国 | USA #12'
+  alpn:
+  - ''
+  alterId: 0
+  cipher: auto
+  network: ws
+  port: 16648
+  server: d1eyz.xiaoyan.io
+  skip-cert-verify: true
+  tls: false
+  type: vmess
+  udp: true
+  uuid: 904f0569-8695-466f-97cf-0de2face1b46
+  ws-opts:
+    headers:
+      Host: f9309cc88637c26f552a1a64fb311cae.mobgslb.tbcache.com
+    path: /
+- name: ermaozi·AT_speednode_0002
+  client-fingerprint: firefox
+  network: ws
+  port: 8443
+  server: 152.53.31.46
+  servername: usa3.pad-sservice.lat
+  skip-cert-verify: false
   tls: true
-  servername: guanwang.awsno.com
-  sni: guanwang.awsno.com
+  type: vless
+  udp: true
+  uuid: 2b0e5676-fb62-4bf0-9607-6e7818421e8e
+  ws-opts:
+    headers:
+      Host: usa3.pad-service.com
+    path: /U1SA
+- name: ermaozi·US_speednode_0039
+  port: 8443
+  server: 44.248.167.117
+  skip-cert-verify: true
+  tls: true
+  type: http
+  udp: true
+- name: ermaozi·US_speednode_0040
+  port: 443
+  server: 38.247.141.135
+  skip-cert-verify: true
+  tls: true
+  type: http
+  udp: true
+- name: ermaozi·US_speednode_0041
+  port: 443
+  server: 64.98.50.100
+  skip-cert-verify: true
+  tls: true
+  type: http
+  udp: true
+- name: ermaozi·US_speednode_0042
+  client-fingerprint: chrome
+  port: 19167
+  server: mx001.zestapp778.com
+  servername: mx001.zestapp778.com
+  skip-cert-verify: false
+  tls: true
+  type: vless
+  udp: true
+  uuid: e9a8144e-5237-488a-afb1-9ca3d8d54c80
+- name: ermaozi·US_speednode_0043
+  client-fingerprint: firefox
+  port: 54857
+  server: 130.94.18.208
+  servername: us001.zestapp778.com
+  skip-cert-verify: false
+  tls: true
+  type: vless
+  udp: true
+  uuid: e9a8144e-5237-488a-afb1-9ca3d8d54c80
+- name: ermaozi·🇳🇱 荷兰 | NLD 4
+  server: 201.34.142.108
+  port: 443
+  type: vless
+  uuid: 4777d90d-265b-4927-a0d1-63f36ed1421c
+  tls: true
+  client-fingerprint: chrome
+  network: xhttp
+  xhttp-opts:
+    path: /assets/nlrelay01/
+    mode: auto
+  udp: true
+- name: ermaozi·🇳🇱 荷兰 | NLD 9
+  server: 48.102.173.125
+  port: 444
+  type: vless
+  uuid: ef5a57c7-84d5-4f86-b99c-875a16da485f
+  tls: true
+  servername: neplay603.gangtype.com
   client-fingerprint: chrome
   network: ws
   ws-opts:
-    path: /hls/cctv5phd.m3u8
+    path: /stream/updates/a66d7902
     headers:
-      Host: guanwang.awsno.com
-- name: 'ermaozi·🇳🇱 荷兰 | NLD #6'
+      Host: neplay603.gangtype.com
+  udp: true
+- name: ermaozi·🇺🇸 美国 | USA 3
+  server: swo2.nexfile.net
+  port: 4443
+  type: vless
+  uuid: a35c508f-4d5d-4531-842e-6e9d43c762c0
+  tls: true
+  servername: swo2.nexfile.net
   client-fingerprint: chrome
   network: xhttp
-  port: 443
-  server: 201.34.142.108
-  tls: true
-  type: vless
-  udp: true
-  uuid: 4777d90d-265b-4927-a0d1-63f36ed1421c
   xhttp-opts:
+    path: /api/v1/sync/
+    host: swo2.nexfile.net
     mode: auto
-    path: /assets/nlrelay01/
-- name: ermaozi·🇩🇪 德国 | DEU 10
-  server: 129.101.109.129
-  port: 443
+  udp: true
+- name: ermaozi·🇺🇸 美国 | USA 6
+  server: 179.253.80.175
+  port: 4443
   type: vless
-  uuid: 25ac78e7-6d1d-4c9a-a450-c01a4871769f
+  uuid: a35c508f-4d5d-4531-842e-6e9d43c762c0
   tls: true
-  servername: copperdell.merlano.monster
+  servername: swo2.nexfile.net
   client-fingerprint: firefox
-  network: grpc
-  grpc-opts:
-    grpc-mode: gun
-    grpc-service-name: glush.de2.v1
-  udp: true
-- name: anaer·美国 267
-  type: vmess
-  network: tcp
-  server: 38.91.107.49
-  port: 18000
-  uuid: f8c8dc3d-0d37-46b0-8b34-a7232882fcfe
-  tls: false
-  alterId: 0
-  cipher: auto
-- name: 'ermaozi·🇺🇸 美国 | USA #3'
-  alpn:
-  - h2
-  client-fingerprint: unsafe
   network: xhttp
-  port: 443
-  server: 188.114.98.0
-  servername: norway.xn--nlqaa425dbaab446bbabd698meae.online
-  tls: true
-  type: vless
-  udp: true
-  uuid: 0280c276-641b-49af-b699-4931c30ac137
   xhttp-opts:
-    host: norway.xn--nlqaa425dbaab446bbabd698meae.online
-    mode: auto
-    path: /api
-- name: ermaozi·🔵93@oneclickvpnkeys
-  obfs: salamander
-  obfs-password: c8827ab99e316c5bd414e21afa915ddf
-  password: 8294f130408299df8cab08c80bf6f819
-  port: 443
-  server: 24.233.8.109
-  skip-cert-verify: true
-  sni: www.bing.com
-  tls: false
-  type: hysteria2
-- name: anaer·美国 261
-  type: vmess
-  network: tcp
-  server: 67.220.85.46
-  port: 18000
-  uuid: f8c8dc3d-0d37-46b0-8b34-a7232882fcfe
+    path: /api/v1/sync/
   udp: true
-  alterId: 0
-  cipher: aes-128-gcm
-- name: cheng·🇭🇰[www.v2nodes.com] ss-HK-1621...
-  cipher: aes-256-gcm
-  password: AMok40FfaM+Ikwre16psBpVk6JHxsQZw
-  port: 8388
-  server: 209.248.57.105
-  type: ss
-- name: anaer·美国 253
-  type: vmess
+- name: ermaozi·🇺🇸 美国 | USA 7
+  server: sparkling-gadabout.quick-cdn.net
+  port: 443
+  type: vless
+  uuid: bde4fc77-a93a-49c0-bf0e-de3471cd52bd
+  tls: true
+  servername: sparkling-gadabout.quick-cdn.net
+  client-fingerprint: chrome
+  network: ws
+  ws-opts:
+    path: /ws
+    headers:
+      Host: sparkling-gadabout.quick-cdn.net
+  udp: true
+- name: ermaozi·🇺🇸 美国 | USA 8
+  server: 5.34.178.120
+  port: 443
+  type: vless
+  uuid: 23b848b7-93e5-4d96-b36d-ed704912e5b7
+  tls: true
+  flow: xtls-rprx-vision
+  reality-opts:
+    public-key: 4RaNuv9yehmcfpdzvRxCWWzEWERWzZSIHqcgg3l35Cw
+    short-id: e16bbf1a5bee2321
+  servername: www.cloudflare.com
+  client-fingerprint: chrome
   network: tcp
-  server: 129.146.143.80
-  port: 48111
-  uuid: d4603cc2-e0ee-4651-83f5-1db5b7168177
-  tls: false
-  alterId: 0
-  cipher: auto
+  udp: true
+- name: ermaozi·🇺🇸 美国 | USA 9
+  server: tachu37.top
+  port: 443
+  type: vless
+  uuid: 65c21703-ae89-4eed-ae87-8bec8a4c000c
+  tls: true
+  alpn:
+  - http/1.1
+  servername: tachu37.top
+  client-fingerprint: chrome
+  network: ws
+  ws-opts:
+    path: /js
+    headers:
+      Host: tachu37.top
+  udp: true
+- name: ermaozi·🇺🇸 美国 | USA 10
+  server: media.embrofree.org
+  port: 443
+  type: hysteria2
+  password: 713142c9-ad09-4894-b35c-645423f3f6c9
+  auth: 713142c9-ad09-4894-b35c-645423f3f6c9
+  sni: media.embrofree.org
+  skip-cert-verify: true
 proxy-groups:
 - name: 🚀 节点选择
   type: select
@@ -305,31 +2308,215 @@ proxy-groups:
 - name: ♻️ 自动选择
   type: url-test
   proxies: &id001
-  - anaer·美国 263
-  - anaer·美国 223
-  - ermaozi·US_speednode_0040
-  - cheng·🇺🇸[www.v2nodes.com] ss-US-1620...
-  - ermaozi·🇺🇸US-🚀@VPNine1
-  - anaer·美国 271
-  - ermaozi·🇺🇸US_1|1.2MB/s
-  - anaer·美国 331
-  - anaer·美国 225
-  - ermaozi·🇺🇸 美国 | USA 2
-  - ermaozi·🔹44@oneclickvpnkeys
-  - cheng·🇺🇸US_11|3.4MB/s
-  - ermaozi·🇸🇪 瑞典 | SWE
-  - ermaozi·🇺🇸 机场推荐:dafei.de 美国 26_IPV4
-  - ermaozi·🇺🇸 机场推荐:dafei.de 美国 89_IPV4
-  - 'cheng·🇺🇸 美国 | USA #5'
-  - ermaozi·🇺🇸_US_美国_IPV4 (12)
-  - 'ermaozi·🇳🇱 荷兰 | NLD #6'
-  - ermaozi·🇩🇪 德国 | DEU 10
-  - anaer·美国 267
-  - 'ermaozi·🇺🇸 美国 | USA #3'
-  - ermaozi·🔵93@oneclickvpnkeys
-  - anaer·美国 261
   - cheng·🇭🇰[www.v2nodes.com] ss-HK-1621...
-  - anaer·美国 253
+  - cheng·🇺🇸[www.v2nodes.com] ss-US-1620...
+  - cheng·🇺🇸US_1|3.8MB/s
+  - 'cheng·🇺🇸 美国 | USA #5'
+  - free18·🇺🇸_美国 (162)
+  - free18·🇺🇸_美国 (163)
+  - free18·🇺🇸_美国 (164)
+  - free18·🇺🇸_美国 (167)
+  - free18·🇺🇸_美国 (168)
+  - free18·🇺🇸_美国 (169)
+  - free18·🇺🇸_美国 (170)
+  - free18·🇺🇸_美国 (171)
+  - free18·🇺🇸_美国 (172)
+  - free18·🇺🇸_美国 (173)
+  - free18·🇺🇸_美国 (174)
+  - free18·🇺🇸_美国 (175)
+  - free18·🇺🇸_美国 (176)
+  - free18·🇺🇸_美国 (177)
+  - free18·🇺🇸_美国 (178)
+  - free18·🇺🇸_美国 (179)
+  - free18·🇺🇸_美国 (180)
+  - free18·🇺🇸_美国 (181)
+  - free18·🇺🇸_美国 (182)
+  - free18·🇵🇱_波兰 (2)
+  - free18·🇺🇸_美国 (67)
+  - free18·🇺🇸_美国 (68)
+  - free18·🇺🇸_美国 (69)
+  - free18·🇺🇸_美国 (70)
+  - free18·🇺🇸_美国 (71)
+  - free18·🇺🇸_美国 (74)
+  - free18·🇺🇸_美国 (76)
+  - free18·🇺🇸_美国 (77)
+  - free18·🇺🇸_美国 (78)
+  - free18·🇺🇸_美国 (79)
+  - free18·🇺🇸_美国 (80)
+  - free18·🇺🇸_美国 (81)
+  - free18·🇺🇸_美国 (82)
+  - free18·🇺🇸_美国 (83)
+  - free18·🇺🇸_美国 (84)
+  - free18·🇺🇸_美国 (85)
+  - free18·🇺🇸_美国 (86)
+  - free18·🇺🇸_美国 (87)
+  - free18·🇺🇸_美国 (88)
+  - free18·🇺🇸_美国 (89)
+  - free18·🇺🇸_美国 (90)
+  - free18·🇺🇸_美国 (91)
+  - free18·🇺🇸_美国 (92)
+  - free18·🇺🇸_美国 (93)
+  - free18·🇺🇸_美国 (94)
+  - free18·🇺🇸_美国 (95)
+  - free18·🇺🇸_美国 (96)
+  - free18·🇺🇸_美国 (97)
+  - free18·🇺🇸_美国 (98)
+  - free18·🇺🇸_美国 (99)
+  - free18·🇺🇸_美国 (100)
+  - free18·🇺🇸_美国 (101)
+  - free18·🇺🇸_美国 (102)
+  - free18·🇺🇸_美国 (103)
+  - free18·🇺🇸_美国 (104)
+  - free18·🇺🇸_美国 (105)
+  - free18·🇺🇸_美国 (106)
+  - free18·🇺🇸_美国 (107)
+  - free18·🇩🇪_德国 (50)
+  - free18·🇺🇸_美国 (109)
+  - free18·🇺🇸_美国 (110)
+  - free18·🇺🇸_美国 (111)
+  - free18·🇺🇸_美国 (112)
+  - free18·🇺🇸_美国 (113)
+  - free18·🇺🇸_美国 (114)
+  - free18·🇺🇸_美国 (115)
+  - free18·🇺🇸_美国 (116)
+  - free18·🇺🇸_美国 (117)
+  - free18·🇺🇸_美国 (118)
+  - free18·🇺🇸_美国 (119)
+  - free18·🇺🇸_美国 (120)
+  - free18·🇺🇸_美国 (121)
+  - free18·🇺🇸_美国 (122)
+  - free18·🇳🇱_荷兰 (44)
+  - free18·🇺🇸_美国 (123)
+  - free18·🇺🇸_美国 (124)
+  - free18·🇺🇸_美国 (125)
+  - free18·🇺🇸_美国 (126)
+  - free18·🇺🇸_美国 (127)
+  - free18·🇺🇸_美国 (128)
+  - free18·🇺🇸_美国 (129)
+  - free18·🇺🇸_美国 (130)
+  - free18·🇺🇸_美国 (131)
+  - free18·🇺🇸_美国 (132)
+  - free18·🇺🇸_美国 (133)
+  - free18·🇺🇸_美国 (134)
+  - free18·🇺🇸_美国 (135)
+  - free18·🇳🇱_荷兰 (45)
+  - free18·🇺🇸_美国 (136)
+  - free18·🇺🇸_美国 (137)
+  - free18·🇺🇸_美国 (138)
+  - free18·🇺🇸_美国 (139)
+  - free18·🇺🇸_美国 (140)
+  - free18·🇺🇸_美国 (141)
+  - free18·🇺🇸_美国 (142)
+  - free18·🇺🇸_美国 (143)
+  - free18·🇺🇸_美国 (144)
+  - free18·🇺🇸_美国 (145)
+  - free18·🇺🇸_美国 (146)
+  - free18·🇺🇸_美国 (148)
+  - free18·🇺🇸_美国 (149)
+  - free18·🇺🇸_美国 (150)
+  - free18·🇺🇸_美国 (151)
+  - free18·🇺🇸_美国 (152)
+  - free18·🇺🇸_美国 (155)
+  - free18·🇺🇸_美国 (156)
+  - free18·🇺🇸_美国 (157)
+  - free18·🇺🇸_美国 (158)
+  - free18·🇺🇸_美国 (159)
+  - free18·🇺🇸_美国 (160)
+  - free18·🇺🇸_美国 (161)
+  - free18·🇺🇸_美国 (65)
+  - free18·🇺🇸_美国 (66)
+  - free18·🇺🇸_美国
+  - free18·🇺🇸_美国 (2)
+  - free18·🇺🇸_美国 (3)
+  - free18·🇺🇸_美国 (4)
+  - free18·🇺🇸_美国 (5)
+  - free18·🇺🇸_美国 (6)
+  - free18·🇺🇸_美国 (7)
+  - free18·🇺🇸_美国 (8)
+  - free18·🇺🇸_美国 (9)
+  - free18·🇺🇸_美国 (10)
+  - free18·🇺🇸_美国 (11)
+  - free18·🇺🇸_美国 (12)
+  - free18·🇺🇸_美国 (13)
+  - free18·🇺🇸_美国 (14)
+  - free18·🇺🇸_美国 (15)
+  - free18·🇺🇸_美国 (16)
+  - free18·🇺🇸_美国 (17)
+  - free18·🇺🇸_美国 (18)
+  - free18·🇺🇸_美国 (19)
+  - free18·🇺🇸_美国 (20)
+  - free18·🇺🇸_美国 (21)
+  - free18·🇺🇸_美国 (22)
+  - free18·🇺🇸_美国 (23)
+  - free18·🇺🇸_美国 (24)
+  - free18·🇺🇸_美国 (25)
+  - free18·🇺🇸_美国 (26)
+  - free18·🇺🇸_美国 (27)
+  - free18·🇺🇸_美国 (28)
+  - free18·🇺🇸_美国 (29)
+  - free18·🇺🇸_美国 (30)
+  - free18·🇺🇸_美国 (31)
+  - free18·🇺🇸_美国 (32)
+  - free18·🇺🇸_美国 (33)
+  - free18·🇺🇸_美国 (34)
+  - free18·🇺🇸_美国 (35)
+  - free18·🇺🇸_美国 (36)
+  - free18·🇺🇸_美国 (37)
+  - free18·🇺🇸_美国 (38)
+  - free18·🇺🇸_美国 (39)
+  - free18·🇺🇸_美国 (40)
+  - free18·🇺🇸_美国 (41)
+  - free18·🇺🇸_美国 (42)
+  - free18·🇺🇸_美国 (43)
+  - free18·🇺🇸_美国 (44)
+  - free18·🇺🇸_美国 (45)
+  - free18·🇺🇸_美国 (46)
+  - free18·🇺🇸_美国 (47)
+  - free18·🇺🇸_美国 (48)
+  - free18·🇺🇸_美国 (49)
+  - free18·🇺🇸_美国 (50)
+  - free18·🇺🇸_美国 (51)
+  - free18·🇺🇸_美国 (52)
+  - free18·🇺🇸_美国 (53)
+  - free18·🇺🇸_美国 (54)
+  - free18·🇺🇸_美国 (55)
+  - free18·🇺🇸_美国 (56)
+  - free18·🇺🇸_美国 (57)
+  - free18·🇺🇸_美国 (58)
+  - free18·🇺🇸_美国 (59)
+  - free18·🇺🇸_美国 (60)
+  - free18·🇺🇸_美国 (62)
+  - free18·🇺🇸_美国 (64)
+  - ermaozi·🇺🇸_US_美国_IPV4
+  - ermaozi·🇺🇸_US_美国_IPV4 (2)
+  - ermaozi·🇺🇸_US_美国_IPV4 (3)
+  - ermaozi·🇺🇸139909 | ⚡️Telegram = t.me/S...
+  - ermaozi·🔵93@oneclickvpnkeys
+  - 'ermaozi·@OutlineReleasedKey #5'
+  - ermaozi·🇭🇰[www.v2nodes.com] vless-HK-4...
+  - ermaozi·🇮🇪[www.v2nodes.com] vless-IE-3...
+  - 'ermaozi·🇳🇱 荷兰 | NLD #2'
+  - ermaozi·🇹🇷[www.v2nodes.com] vless-TR-1...
+  - ermaozi·美国5|@ripaojiedian
+  - 'ermaozi·🇺🇸 美国 | USA #2'
+  - 'ermaozi·🇺🇸 美国 | USA #6'
+  - 'ermaozi·🇺🇸 美国 | USA #10'
+  - 'ermaozi·🇺🇸 美国 | USA #11'
+  - 'ermaozi·🇺🇸 美国 | USA #12'
+  - ermaozi·AT_speednode_0002
+  - ermaozi·US_speednode_0039
+  - ermaozi·US_speednode_0040
+  - ermaozi·US_speednode_0041
+  - ermaozi·US_speednode_0042
+  - ermaozi·US_speednode_0043
+  - ermaozi·🇳🇱 荷兰 | NLD 4
+  - ermaozi·🇳🇱 荷兰 | NLD 9
+  - ermaozi·🇺🇸 美国 | USA 3
+  - ermaozi·🇺🇸 美国 | USA 6
+  - ermaozi·🇺🇸 美国 | USA 7
+  - ermaozi·🇺🇸 美国 | USA 8
+  - ermaozi·🇺🇸 美国 | USA 9
+  - ermaozi·🇺🇸 美国 | USA 10
 - name: 🔀 故障转移
   type: fallback
   proxies: *id001
