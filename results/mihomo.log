@@ -1,0 +1,8 @@
+time="2026-11-28T06:49:48.845666252Z" level=info msg="Start initial configuration in progress"
+time="2026-11-28T06:49:48.885762068Z" level=info msg="Geodata Loader mode: memconservative"
+time="2026-11-28T06:49:48.885790200Z" level=info msg="Geosite Matcher implementation: succinct"
+time="2026-11-28T06:49:48.885912174Z" level=info msg="Initial configuration complete, total time: 40ms"
+time="2026-11-28T06:50:34.955889432Z" level=warning msg="wrong clientFingerprint:unsafe"
+time="2026-11-28T06:50:36.129285535Z" level=warning msg="wrong clientFingerprint:unsafe"
+time="2026-11-28T06:51:25.908501028Z" level=warning msg="wrong clientFingerprint:unsafe"
+time="2026-11-28T06:51:40.270458720Z" level=warning msg="Mihomo shutting down"
